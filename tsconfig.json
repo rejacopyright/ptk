@@ -12,15 +12,39 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
+    // "target": "es5",
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
+    "allowUmdGlobalAccess": true,
+    "noImplicitReturns": false,
+    "allowSyntheticDefaultImports": true,
+    "useUnknownInCatchVariables": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "./_types",
+    "typeRoots": ["./_types"],
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
     "paths": {
-      "@/*": ["./*"]
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@auth": ["pages/user/auth"],
+      "@auth/*": ["pages/user/auth/*"],
+      "@api/*": ["_api/*"],
+      "@helpers": ["_helpers"],
+      "@hooks": ["_hooks"],
+      "@components/*": ["_components/*"],
+      "@metronic/*": ["_metronic/*"],
+      "@redux": ["_redux"],
+      "@redux/*": ["_redux/*"],
+      "@public/*": ["public/*"],
+      "@images/*": ["public/images/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "build/types/**/*.ts"],
+  "exclude": ["node_modules", "build"]
 }
