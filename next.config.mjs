@@ -26,6 +26,11 @@ const rewrites = [
 ]
 const redirects = [
   {
+    source: '/auth',
+    destination: '/',
+    permanent: true,
+  },
+  {
     source: '/auth/:pathname*',
     destination: '/:pathname*',
     permanent: true,
