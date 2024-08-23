@@ -13,14 +13,7 @@ export const NavbarDesktop = ({ _language }: any) => {
       style={{ height: '56px' }}>
       <div className='d-flex column gap-5 flex-fill align-items-center'>
         <div className='d-flex column gap-2 align-items-center'>
-          <Image
-            alt='Logo'
-            src='/potentok.png'
-            className='h-32px'
-            width={158}
-            height={32}
-            priority
-          />
+          <Image alt='Logo' src='/potentok.png' className='' width={125} height={25} priority />
         </div>
       </div>
       <div className='d-flex flex-row-reverse justify-content-end-reverse column flex-fill gap-7 align-items-center'>

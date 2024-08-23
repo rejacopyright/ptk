@@ -4,9 +4,9 @@ import '@metronic/assets/sass/style.scss'
 import './custom.scss'
 import './potentok.scss'
 
+import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'
 import Image from 'next/image'
-import { ToastContainer } from 'react-toastify'
 
 export default function RootLayout({ children }) {
   return (
@@ -44,8 +44,7 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning>
         <LayoutProvider>
-          {children}
-          <ToastContainer limit={0} stacked />
+          <ToastProvider>{children}</ToastProvider>
         </LayoutProvider>
         <div id='splash-screen' className='splash-screen'>
           <Image src='/potentok.png' alt='Open Badge' width={125} height={25} priority />

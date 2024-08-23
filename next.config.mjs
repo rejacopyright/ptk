@@ -9,7 +9,8 @@ const __dirname = path.dirname(__filename)
 const rewrites = [
   {
     source: '/',
-    destination: '/public/home',
+    // destination: '/public/home',
+    destination: '/wallet',
   },
   {
     source: '/login',

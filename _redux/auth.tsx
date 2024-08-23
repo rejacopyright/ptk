@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { persistReducer } from 'redux-persist'
 import storageLocal from 'redux-persist/lib/storage'
 
+export const persistKey = 'global'
 // Original Reducer
 export const authReducer = createSlice({
   name: 'root',

@@ -1,7 +1,5 @@
+'use client'
 import langKeys from '@metronic/i18n/messages/en.json'
-import { FC, ReactNode, useEffect } from 'react'
-import { createRoot } from 'react-dom/client'
-import { renderToString } from 'react-dom/server'
 import { useIntl } from 'react-intl'
 
 export function getJWTPayload(token: any) {
@@ -17,7 +15,7 @@ export function getJWTPayload(token: any) {
           ?.join('')
       )
       return JSON.parse(jsonPayload)
-    } catch (err) {
+    } catch {
       return undefined
     }
   } else {
@@ -146,14 +144,17 @@ export const sortByDayName = (days: any = [], key = 'day') => {
   return days.sort((a: any, b: any) => indexOfDays[a[key]] - indexOfDays[b[key]])
 }
 
-export const PageSubTitle = ({ title, reload }: any) => {
+export const PageSubTitle = ({ title, reload: _reload }: any) => {
   const subTitle: any = document.querySelector('.pageSubTitle')
-  useEffect(() => {
-    subTitle && title && (subTitle.innerHTML = renderToString(title))
-    return () => {
-      subTitle && (subTitle.innerHTML = '')
-    }
-  }, [subTitle, title, reload])
+  if (subTitle && title) {
+    subTitle.innerHTML = title
+  }
+  // useEffect(() => {
+  //   subTitle && title && (subTitle.innerHTML = renderToString(title))
+  //   return () => {
+  //     subTitle && (subTitle.innerHTML = '')
+  //   }
+  // }, [subTitle, title, reload])
   return null
 }
 
@@ -188,32 +189,32 @@ export const decodeHTMLEntities = (text?: any) => {
   return textArea?.value
 }
 
-export const ToolbarActions: FC<{ children?: ReactNode; asMobileTitle?: boolean }> = ({
-  children,
-  asMobileTitle,
-}) => {
-  const toolbar_actions: any = document.getElementById('toolbar_actions')
-  if (asMobileTitle) {
-    const toolbar_container: any = document.getElementById('kt_toolbar_container')
-    toolbar_container.classList.add('justify-content-center')
-  } else {
-    const toolbar_container: any = document.getElementById('kt_toolbar_container')
-    toolbar_container.classList.remove('justify-content-center')
-  }
-  useEffect(() => {
-    const toolbar_root = createRoot(toolbar_actions)
-    setTimeout(() => {
-      toolbar_root && children && toolbar_root.render(children)
-    }, 100)
-    return () => {
-      setTimeout(() => {
-        toolbar_root && children && toolbar_root.unmount()
-      }, 100)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [children])
-  return null
-}
+// export const ToolbarActions: FC<{ children?: ReactNode; asMobileTitle?: boolean }> = ({
+//   children,
+//   asMobileTitle,
+// }) => {
+//   const toolbar_actions: any = document.getElementById('toolbar_actions')
+//   if (asMobileTitle) {
+//     const toolbar_container: any = document.getElementById('kt_toolbar_container')
+//     toolbar_container.classList.add('justify-content-center')
+//   } else {
+//     const toolbar_container: any = document.getElementById('kt_toolbar_container')
+//     toolbar_container.classList.remove('justify-content-center')
+//   }
+//   useEffect(() => {
+//     const toolbar_root = createRoot(toolbar_actions)
+//     setTimeout(() => {
+//       toolbar_root && children && toolbar_root.render(children)
+//     }, 100)
+//     return () => {
+//       setTimeout(() => {
+//         toolbar_root && children && toolbar_root.unmount()
+//       }, 100)
+//     }
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [children])
+//   return null
+// }
 
 export const copyToClipboard = async (text: any) => {
   try {
@@ -223,7 +224,7 @@ export const copyToClipboard = async (text: any) => {
     } else {
       throw new Error("Can't access the clipboard. Check your browser permissions.")
     }
-  } catch (err: any) {
+  } catch {
     //
   }
 }
