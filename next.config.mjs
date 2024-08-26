@@ -20,10 +20,6 @@ const rewrites = [
     source: '/register',
     destination: '/auth/register',
   },
-  {
-    source: '/oke',
-    destination: '/wallet',
-  },
 ]
 const redirects = [
   {

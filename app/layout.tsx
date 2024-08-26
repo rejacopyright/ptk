@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-sync-scripts */
 import '@metronic/assets/sass/style.scss'
-import './custom.scss'
-import './potentok.scss'
+import '@styles/custom.scss'
+import '@styles/potentok.scss'
 
 import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'

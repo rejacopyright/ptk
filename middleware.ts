@@ -1,15 +1,25 @@
-import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function middleware(req) {
+export async function middleware(req: NextRequest) {
   // const url = req.nextUrl.clone()
 
   // if (req.nextUrl.pathname.startsWith('/admin')) {
   //   return NextResponse.rewrite(new URL('/', req.url))
   //   // return NextResponse.next()
   // }
-  if (req.nextUrl.pathname.startsWith('/')) {
-    console.log(req.nextUrl)
+
+  const authRoutes: any = ['/login', '/register']
+
+  const cookieStore = cookies()
+  const hasToken = cookieStore?.has('token') && Boolean(cookieStore?.get('token')?.value)
+
+  if (!authRoutes.includes(req.nextUrl.pathname) && !hasToken) {
     return NextResponse.redirect(new URL('/login', req.nextUrl))
+  } else if (authRoutes.includes(req.nextUrl.pathname) && hasToken) {
+    const params: any = req.nextUrl.searchParams
+    const requestParam: any = await params.get('request')
+    return NextResponse.redirect(new URL(requestParam ? atob(requestParam) : '/', req.url))
   }
 
   return NextResponse.next()
@@ -17,5 +27,5 @@ export async function middleware(req) {
 
 export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-  matcher: ['/((?!api|_next/static|login|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
 }

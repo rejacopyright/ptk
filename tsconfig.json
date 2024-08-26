@@ -31,7 +31,7 @@
     "noImplicitAny": false,
     "paths": {
       "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"],
+      "@styles/*": ["_styles/*"],
       "@auth": ["pages/user/auth"],
       "@auth/*": ["pages/user/auth/*"],
       "@api/*": ["_api/*"],

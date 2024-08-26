@@ -10,7 +10,7 @@ export const Footer: FC<any> = () => {
       style={{ height: '184px', background: '#efeff1' }}>
       <div className=''>
         <Link href='/'>
-          <Image src='/potentok-gray.png' alt='potentok-logo' width={168} height={34} />
+          <Image src='/potentok-gray.png' alt='potentok-logo' width={168} height={34} priority />
         </Link>
         <div className='d-flex align-items-center justify-content-center justify-content-lg-start my-10px gap-8px text-gray-700'>
           <Link href='/policy' className='fs-14px fw-bolder text-dark'>
