@@ -1,4 +1,4 @@
-import { toAbsoluteUrl, translate } from '@helpers'
+import { translate } from '@helpers'
 import { setLanguage, useLang } from '@metronic/i18n/Metronici18n'
 import clsx from 'clsx'
 import { FC } from 'react'
@@ -8,17 +8,17 @@ const Languages: FC = () => {
     {
       lang: 'en',
       name: translate('ENGLISH'),
-      flag: toAbsoluteUrl('/media/flags/us.svg'),
+      flag: '/media/flags/us.svg',
     },
     {
       lang: 'ko',
       name: translate('KOREA'),
-      flag: toAbsoluteUrl('/media/flags/kr.svg'),
+      flag: '/media/flags/kr.svg',
     },
     {
       lang: 'id',
       name: translate('INDONESIA'),
-      flag: toAbsoluteUrl('/media/flags/id.svg'),
+      flag: '/media/flags/id.svg',
     },
   ]
   const lang = useLang()

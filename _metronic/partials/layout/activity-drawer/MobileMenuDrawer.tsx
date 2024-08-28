@@ -50,7 +50,7 @@ const MobileMenuDrawer: FC<any> = () => {
                   style={{ width: '32px', height: '32px' }}
                 />
                 <div className='d-flex justify-content-center align-items-center user-select-none fs-14px lh-1'>
-                  <span className='fw-bold' style={{ color: '#272D37' }}>
+                  <span suppressHydrationWarning className='fw-bold' style={{ color: '#272D37' }}>
                     {email}
                   </span>
                 </div>

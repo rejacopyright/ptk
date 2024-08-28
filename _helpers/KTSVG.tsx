@@ -1,4 +1,3 @@
-import { toAbsoluteUrl } from '@helpers'
 import { FC } from 'react'
 import SVG from 'react-inlinesvg'
 
@@ -14,21 +13,22 @@ type Props = {
 
 const KTSVG: FC<Props> = ({ className = '', path, svgClassName = '', width, height, style }) => {
   return (
-    <span className={`svg-icon ${className}`}>
+    <div suppressHydrationWarning className={`svg-icon ${className}`}>
       <SVG
-        src={toAbsoluteUrl(path)}
+        suppressHydrationWarning
+        src={path}
         className={svgClassName || (!width && !height ? 'mh-50px' : 'w-auto h-auto')}
         width={width}
         height={height}
         style={style}
       />
-    </span>
+    </div>
   )
 }
 const IMG: FC<Props> = ({ className = '', path, width, height, style, alt = '' }) => {
   return (
     <img
-      src={toAbsoluteUrl(path)}
+      src={path}
       className={className}
       alt={alt}
       width={width || 'auto'}

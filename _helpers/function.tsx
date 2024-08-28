@@ -25,15 +25,15 @@ export function getJWTPayload(token: any) {
 
 export const detectMobileScreen = () => {
   let isMobile: boolean = false
-  if (window.innerWidth < 720) {
-    isMobile = true
-  } else {
-    isMobile = false
+  if (typeof window !== 'undefined') {
+    if (window.innerWidth < 720) {
+      isMobile = true
+    } else {
+      isMobile = false
+    }
   }
   return isMobile
 }
-
-export const toAbsoluteUrl = (pathname: string) => process.env.PUBLIC_URL + pathname
 
 export const truncate: any = (str: any, max: number) => {
   const string = str?.toString()?.replace(/  +/g, ' ')

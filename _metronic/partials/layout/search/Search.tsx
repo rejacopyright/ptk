@@ -1,4 +1,5 @@
-import { KTSVG, toAbsoluteUrl } from '@helpers'
+/* eslint-disable max-lines */
+import { KTSVG } from '@helpers'
 import { SearchComponent } from '@metronic/assets/ts/components'
 import { FC, useEffect, useRef, useState } from 'react'
 
@@ -150,7 +151,7 @@ const Search: FC = () => {
 
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
-                  <img src={toAbsoluteUrl('/media/avatars/300-6.jpg')} alt='' />
+                  <img src='/media/avatars/300-6.jpg' alt='' />
                 </div>
 
                 <div className='d-flex flex-column justify-content-start fw-bold'>
@@ -161,7 +162,7 @@ const Search: FC = () => {
 
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
-                  <img src={toAbsoluteUrl('/media/avatars/300-2.jpg')} alt='' />
+                  <img src='/media/avatars/300-2.jpg' alt='' />
                 </div>
 
                 <div className='d-flex flex-column justify-content-start fw-bold'>
@@ -172,7 +173,7 @@ const Search: FC = () => {
 
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
-                  <img src={toAbsoluteUrl('/media/avatars/300-9.jpg')} alt='' />
+                  <img src='/media/avatars/300-9.jpg' alt='' />
                 </div>
 
                 <div className='d-flex flex-column justify-content-start fw-bold'>
@@ -212,7 +213,7 @@ const Search: FC = () => {
                   <span className='symbol-label bg-light'>
                     <img
                       className='w-20px h-20px'
-                      src={toAbsoluteUrl('/media/svg/brand-logos/volicity-9.svg')}
+                      src='/media/svg/brand-logos/volicity-9.svg'
                       alt=''
                     />
                   </span>
@@ -227,11 +228,7 @@ const Search: FC = () => {
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
                   <span className='symbol-label bg-light'>
-                    <img
-                      className='w-20px h-20px'
-                      src={toAbsoluteUrl('/media/svg/brand-logos/tvit.svg')}
-                      alt=''
-                    />
+                    <img className='w-20px h-20px' src='/media/svg/brand-logos/tvit.svg' alt='' />
                   </span>
                 </div>
 
@@ -244,11 +241,7 @@ const Search: FC = () => {
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
                   <span className='symbol-label bg-light'>
-                    <img
-                      className='w-20px h-20px'
-                      src={toAbsoluteUrl('/media/svg/misc/infography.svg')}
-                      alt=''
-                    />
+                    <img className='w-20px h-20px' src='/media/svg/misc/infography.svg' alt='' />
                   </span>
                 </div>
 
@@ -261,11 +254,7 @@ const Search: FC = () => {
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
                   <span className='symbol-label bg-light'>
-                    <img
-                      className='w-20px h-20px'
-                      src={toAbsoluteUrl('/media/svg/brand-logos/leaf.svg')}
-                      alt=''
-                    />
+                    <img className='w-20px h-20px' src='/media/svg/brand-logos/leaf.svg' alt='' />
                   </span>
                 </div>
 
@@ -278,11 +267,7 @@ const Search: FC = () => {
               <a href='/#' className='d-flex text-dark text-hover-primary align-items-center mb-5'>
                 <div className='symbol symbol-40px me-4'>
                   <span className='symbol-label bg-light'>
-                    <img
-                      className='w-20px h-20px'
-                      src={toAbsoluteUrl('/media/svg/brand-logos/tower.svg')}
-                      alt=''
-                    />
+                    <img className='w-20px h-20px' src='/media/svg/brand-logos/tower.svg' alt='' />
                   </span>
                 </div>
 

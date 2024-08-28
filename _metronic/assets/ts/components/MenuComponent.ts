@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   DataUtil,
   DOMEventHandlerUtil,
@@ -1009,23 +1010,25 @@ class MenuComponent {
     )
 
     // Resize handler
-    window.addEventListener('resize', () => {
-      let timer
-      throttle(
-        timer,
-        () => {
-          // Locate and update Drawer instances on window resize
-          const elements = document.querySelectorAll('[data-kt-menu="true"]')
-          elements.forEach((el) => {
-            const menu = MenuComponent.getInstance(el as HTMLElement)
-            if (menu) {
-              menu.update()
-            }
-          })
-        },
-        200
-      )
-    })
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => {
+        let timer
+        throttle(
+          timer,
+          () => {
+            // Locate and update Drawer instances on window resize
+            const elements = document.querySelectorAll('[data-kt-menu="true"]')
+            elements.forEach((el) => {
+              const menu = MenuComponent.getInstance(el as HTMLElement)
+              if (menu) {
+                menu.update()
+              }
+            })
+          },
+          200
+        )
+      })
+    }
   }
 
   public static bootstrap = () => {

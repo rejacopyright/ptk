@@ -1,17 +1,18 @@
 import { KTSVG, translate } from '@helpers'
 import clsx from 'clsx'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 
 const Index: FC<any> = () => {
-  const { pathname: path } = useLocation()
+  const path = usePathname()
   return (
     <>
       <div className='h-75px' />
       <div className='position-fixed bottom-0 w-100'>
         <div className='shadow-sm border-top border-gray-200 bg-white p-2'>
           <div className='row'>
-            <Link to='/gallery' className='col text-center'>
+            <Link href='/gallery' className='col text-center'>
               <KTSVG
                 path={`/media/icons/custom/icon_1${path?.startsWith('/gallery') ? '_active' : ''}.svg`}
                 svgClassName='w-35px h-35px'
@@ -21,7 +22,7 @@ const Index: FC<any> = () => {
                 {translate('MENU.MOBILE.GALLERY')}
               </div>
             </Link>
-            <Link to='/submission' className='col text-center'>
+            <Link href='/submission' className='col text-center'>
               <KTSVG
                 path={`/media/icons/custom/icon_2${path?.startsWith('/submission') ? '_active' : ''}.svg`}
                 svgClassName='w-35px h-35px'
@@ -32,7 +33,7 @@ const Index: FC<any> = () => {
               </div>
             </Link>
             <Link
-              to='/wallet'
+              href='/wallet'
               className='col justify-content-center align-items-center d-flex'
               style={{ top: -15 }}>
               <div
@@ -55,7 +56,7 @@ const Index: FC<any> = () => {
                 </span>
               </div>
             </Link>
-            <Link to='/issue' className='col text-center'>
+            <Link href='/issue' className='col text-center'>
               <KTSVG
                 path={`/media/icons/custom/icon_3${path?.startsWith('/issue') ? '_active' : ''}.svg`}
                 svgClassName='w-35px h-35px'
@@ -65,7 +66,7 @@ const Index: FC<any> = () => {
                 {translate('MENU.MOBILE.BADGE_ISSUANCE')}
               </div>
             </Link>
-            <Link to='/info' className='col text-center'>
+            <Link href='/info' className='col text-center'>
               <KTSVG
                 path={`/media/icons/custom/icon_4${path?.startsWith('/info') ? '_active' : ''}.svg`}
                 svgClassName='w-35px h-35px'

@@ -1,28 +1,29 @@
+'use client'
+import { ErrorBoundaryPage } from '@components/layouts/ErrorBoundary'
 import { Footer } from '@components/layouts/Footer'
+import { defineRole } from '@components/layouts/LayoutConfig'
 import ModalUpdateProfile from '@components/modal/ModalUpdateProfile'
 import ModalUpTimeLogin from '@components/modal/ModalUpTimeLogin'
 import { detectMobileScreen, getJWTPayload } from '@helpers'
-import { useSize } from '@hooks'
+import { useLocation, useSize } from '@hooks'
 import { MenuComponent } from '@metronic/assets/ts/components'
+import { Content } from '@metronic/layout/components/Content'
+import { DefaultHeader } from '@metronic/layout/components/header/DefaultHeader'
+import { ScrollTop } from '@metronic/layout/components/ScrollTop'
+import { PageDataProvider } from '@metronic/layout/core'
+import { MasterInit } from '@metronic/layout/MasterInit'
 import { MobileMenuDrawer } from '@metronic/partials'
-import { ErrorBoundaryPage } from '@pages/_global/ErrorBoundary'
 import { logout } from '@redux'
 import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import moment from 'moment'
+import { redirect, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { shallowEqual, useSelector } from 'react-redux'
-import { Outlet, useLocation } from 'react-router-dom'
-import { defineRole } from 'src/routes'
 
-import { Content } from './components/Content'
-import { DefaultHeader } from './components/header/DefaultHeader'
-import { ScrollTop } from './components/ScrollTop'
-import { PageDataProvider } from './core'
-import { MasterInit } from './MasterInit'
-
-const MasterLayout = () => {
+const UserLayout = ({ children }) => {
+  const pathname = usePathname()
   const location = useLocation()
   const user: any = useSelector(({ user }: any) => user, shallowEqual)
   const Navbar: any = defineRole?.navbar
@@ -34,19 +35,20 @@ const MasterLayout = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [upTime, setUpTime] = useState<number>(0)
   const [isUpdateProfile, setUpdateProfile] = useState<boolean>(false)
-  const [mobilePageGoBack, setMobilePageGoBack] = useState({
-    status: false,
-    to: '/',
-    title: '',
-  })
 
-  window.onfocus = () => {
-    if (!token) {
-      logout()
-    }
+  const [hasToken, setHasToken] = useState<boolean>(false)
+
+  if (typeof window !== 'undefined') {
+    window.onfocus = () => !token && logout()
   }
 
+  // location?.url
   useEffect(() => {
+    setHasToken(Boolean(token))
+    if (!token) {
+      redirect(`/login?request=${location?.urlBtoa}`)
+    }
+
     const { exp }: any = getJWTPayload(token) || {}
     const countDown = setInterval(() => {
       // moment.utc(moment.unix(exp).diff(moment())).format('HH:mm:ss')
@@ -66,7 +68,7 @@ const MasterLayout = () => {
     return () => {
       clearInterval(countDown)
     }
-  }, [token])
+  }, [location?.urlBtoa, token])
 
   useSize(() => {
     setIsMobile(detectMobileScreen())
@@ -76,7 +78,7 @@ const MasterLayout = () => {
     setTimeout(() => {
       MenuComponent.reinitialization()
     }, 500)
-  }, [location.key])
+  }, [pathname])
 
   return (
     <ErrorBoundary
@@ -87,23 +89,22 @@ const MasterLayout = () => {
       <PageDataProvider>
         <div className='page d-flex flex-row flex-column-fluid bg-body'>
           <div
+            suppressHydrationWarning
             className={clsx('wrapper d-flex flex-column flex-row-fluid', {
               'ps-0': !sidebar,
-              'pt-0': !token,
+              'pt-0': !hasToken,
             })}
             id='kt_wrapper'>
-            <Header sidebar={sidebar} canMobilePageGoBack={mobilePageGoBack} />
+            <Header sidebar={sidebar} />
             <div
               id='kt_content'
               className='content d-flex flex-column flex-column-fluid px-7 px-lg-10'>
               <div className='post d-flex w-100' id='kt_post'>
-                <Content>
-                  <Outlet context={{ setMobilePageGoBack }} />
-                </Content>
+                <Content>{children}</Content>
               </div>
             </div>
             {/* <Footer /> */}
-            {['profile'].includes(location?.pathname?.substring(1)?.split('/')?.[0]) && <Footer />}
+            {['profile'].includes(pathname?.substring(1)?.split('/')?.[0]) && <Footer />}
           </div>
         </div>
         <MobileMenuDrawer />
@@ -129,4 +130,4 @@ const MasterLayout = () => {
   )
 }
 
-export { MasterLayout }
+export default UserLayout

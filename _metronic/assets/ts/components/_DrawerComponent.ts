@@ -276,11 +276,11 @@ class DrawerComponent {
   }
 
   // Event API
-  public on = (name: string, handler: Function) => {
+  public on = (name: string, handler: any) => {
     return EventHandlerUtil.on(this.element, name, handler)
   }
 
-  public one = (name: string, handler: Function) => {
+  public one = (name: string, handler: any) => {
     return EventHandlerUtil.one(this.element, name, handler)
   }
 
@@ -347,25 +347,27 @@ class DrawerComponent {
   // Global Initialization
   public static initGlobalHandlers(): void {
     // Window Resize Handling
-    window.addEventListener('resize', () => {
-      let timer: number | undefined
-      throttle(
-        timer,
-        () => {
-          // Locate and update Drawer instances on window resize
-          const elements = document.body.querySelectorAll('[data-kt-drawer="true"]')
-          elements.forEach((el) => {
-            const item = el as HTMLElement
-            const instance = DrawerComponent.getInstance(item.id)
-            if (instance) {
-              instance.element = item
-              instance.update()
-            }
-          })
-        },
-        200
-      )
-    })
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => {
+        let timer: number | undefined
+        throttle(
+          timer,
+          () => {
+            // Locate and update Drawer instances on window resize
+            const elements = document.body.querySelectorAll('[data-kt-drawer="true"]')
+            elements.forEach((el) => {
+              const item = el as HTMLElement
+              const instance = DrawerComponent.getInstance(item.id)
+              if (instance) {
+                instance.element = item
+                instance.update()
+              }
+            })
+          },
+          200
+        )
+      })
+    }
   }
 
   public static bootstrap = () => {

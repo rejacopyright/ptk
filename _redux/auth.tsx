@@ -2,7 +2,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 import { persistReducer } from 'redux-persist'
-import storageLocal from 'redux-persist/lib/storage'
+
+import storageLocal from './conditionalStorage'
 
 export const persistKey = 'global'
 // Original Reducer

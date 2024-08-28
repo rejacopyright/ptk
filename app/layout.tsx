@@ -6,6 +6,7 @@ import '@styles/potentok.scss'
 
 import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'
+import { ReduxProvider } from '@redux/Provider'
 import Image from 'next/image'
 
 export default function RootLayout({ children }) {
@@ -43,9 +44,11 @@ export default function RootLayout({ children }) {
           crossOrigin='anonymous'></script>
       </head>
       <body suppressHydrationWarning>
-        <LayoutProvider>
-          <ToastProvider>{children}</ToastProvider>
-        </LayoutProvider>
+        <ReduxProvider>
+          <LayoutProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </LayoutProvider>
+        </ReduxProvider>
         <div id='splash-screen' className='splash-screen'>
           <Image src='/potentok.png' alt='Open Badge' width={125} height={25} priority />
         </div>

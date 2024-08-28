@@ -1,8 +1,8 @@
 import { useLayout } from '@metronic/layout/core/LayoutProvider'
 import { usePageData } from '@metronic/layout/core/PageData'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 
 const DefaultTitle: FC = () => {
   const { pageTitle, pageDescription, pageBreadcrumbs } = usePageData()
@@ -44,7 +44,7 @@ const DefaultTitle: FC = () => {
                   })}
                   key={`${item.path}${index}`}>
                   {!item.isSeparator ? (
-                    <Link className='text-muted text-hover-primary' to={item.path}>
+                    <Link className='text-muted text-hover-primary' href={item?.path || '/'}>
                       {item.title}
                     </Link>
                   ) : (

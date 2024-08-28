@@ -1,3 +1,4 @@
+'use client'
 import {
   EventHandlerUtil,
   getAttributeValueByBreakpoint,
@@ -116,11 +117,11 @@ class SwapperComponent {
   }
 
   // Event API
-  public on = (name: string, handler: Function) => {
+  public on = (name: string, handler: any) => {
     return EventHandlerUtil.on(this.element, name, handler)
   }
 
-  public one = (name: string, handler: Function) => {
+  public one = (name: string, handler: any) => {
     return EventHandlerUtil.one(this.element, name, handler)
   }
 
@@ -187,22 +188,24 @@ class SwapperComponent {
 }
 
 // Window resize handler
-window.addEventListener('resize', () => {
-  let timer
-  throttle(
-    timer,
-    () => {
-      // Locate and update Offcanvas instances on window resize
-      const elements = document.querySelectorAll(defaultSwapperQueires.instanseQuery)
-      elements.forEach((el) => {
-        const place = SwapperComponent.getInstance(el as HTMLElement)
-        if (place) {
-          place.update()
-        }
-      })
-    },
-    200
-  )
-})
+if (typeof window !== 'undefined') {
+  window.addEventListener('resize', () => {
+    let timer
+    throttle(
+      timer,
+      () => {
+        // Locate and update Offcanvas instances on window resize
+        const elements = document.querySelectorAll(defaultSwapperQueires.instanseQuery)
+        elements.forEach((el) => {
+          const place = SwapperComponent.getInstance(el as HTMLElement)
+          if (place) {
+            place.update()
+          }
+        })
+      },
+      200
+    )
+  })
+}
 
 export { defaultSwapperOptions, defaultSwapperQueires, SwapperComponent }

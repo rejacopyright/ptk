@@ -5,15 +5,15 @@ import {
   StickyComponent,
   ToggleComponent,
 } from '@metronic/assets/ts/components'
+import { usePathname } from 'next/navigation'
 import { FC, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
 
 interface Props {
   isMobile?: boolean
 }
 
 export const ScrollTop: FC<Props> = ({ isMobile }) => {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const isFirstRun = useRef(true)
 
   const pluginsReinitialization = () => {

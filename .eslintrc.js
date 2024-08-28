@@ -24,6 +24,7 @@ module.exports = {
     'simple-import-sort',
   ],
   rules: {
+    '@next/next/no-img-element': 'off',
     'max-lines': ['error', { max: 500, skipBlankLines: false, skipComments: false }],
     'prefer-arrow-callback': ['warn', { allowNamedFunctions: false }],
     'no-duplicate-imports': 'error',
@@ -40,6 +41,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     // '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
@@ -54,6 +56,7 @@ module.exports = {
     // "react-hooks/exhaustive-deps": "error",
     'react-hooks/rules-of-hooks': 'off',
     'react/no-array-index-key': 'off',
+    'react/no-unescaped-entities': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-unstable-nested-components': [
       'off',

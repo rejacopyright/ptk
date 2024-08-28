@@ -1,14 +1,19 @@
+'use client'
 import { logoutAPI } from '@api/auth'
 import { logout } from '@redux'
-import { FC } from 'react'
+import Link from 'next/link'
+import { FC, useEffect, useState } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 // import { Languages } from './Languages'
 
 const MenuProfile: FC = () => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const userStore: any = useSelector(({ user }: any) => user, shallowEqual)
+  const [user, setUser] = useState<any>({})
   const email: any = user?.mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')?.user_eml
+  useEffect(() => {
+    setUser(userStore)
+  }, [userStore])
 
   return (
     <div
@@ -29,10 +34,10 @@ const MenuProfile: FC = () => {
       <div className='separator my-2'></div>
 
       <div className='menu-item px-5'>
-        <Link to={`/profile`} className='menu-link px-5'>
+        <Link href={`/profile`} className='menu-link px-5'>
           나의 페이지
         </Link>
-        {/* <Link to={`/history/login`} className='menu-link px-5'>
+        {/* <Link href={`/history/login`} className='menu-link px-5'>
           {translate('LOGIN_HISTORY')}
         </Link> */}
       </div>
@@ -88,8 +93,10 @@ const MenuProfile: FC = () => {
       {/* <Languages /> */}
 
       <div
-        className='menu-item px-5'
-        onClick={async () => {
+        className='menu-item-custom px-5'
+        onClick={async (e: any) => {
+          e.preventDefault()
+          e.stopPropagation()
           await logout()
           await logoutAPI(user?.user_id).catch(() => '')
         }}>

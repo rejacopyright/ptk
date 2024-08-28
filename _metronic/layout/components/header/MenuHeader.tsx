@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { KTSVG, toAbsoluteUrl } from '@helpers'
+import { KTSVG } from '@helpers'
 import { useLayout, usePageData } from '@metronic/layout/core'
 import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import last from 'lodash/last'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, useEffect, useState } from 'react'
 
 import { DefaultTitle } from './page-title/DefaultTitle'
 import { Topbar } from './Topbar'
@@ -18,6 +18,12 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
   const { header, aside } = config
   const pathname = usePathname()
   const currentPath: any = last(pathname?.split('/') || [])
+
+  const [hasToken, setHasToken] = useState<boolean>(false)
+
+  useEffect(() => {
+    setHasToken(Boolean(token))
+  }, [token])
 
   const menuClass: string =
     'fs-15px fw-500 px-24px d-flex align-items-center border-bottom border-2 border-white'
@@ -34,10 +40,11 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
     'bg-light-primary text-primary border-primary header-active-item fw-bolder'
   return (
     <div
+      suppressHydrationWarning
       id='kt_header'
-      className={clsx('header shadow-none', classes?.header.join(' '), 'align-items-stretch', {
+      className={clsx('header shadow-none align-items-stretch', classes?.header.join(' '), {
         'start-0': !sidebar,
-        'd-flex d-lg-none': !token,
+        'd-flex d-lg-none': !hasToken,
       })}>
       <div
         className={clsx(
@@ -59,7 +66,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
         {!aside?.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
             <Link href='/' className='d-lg-none'>
-              <img alt='Logo' src={toAbsoluteUrl('/potentok.png')} className='h-20px' />
+              <img alt='Logo' src='/potentok.png' className='h-20px' />
             </Link>
           </div>
         )}
@@ -70,16 +77,14 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
             {logoReplacement ? (
               <div className='d-flex d-lg-none align-items-center'>{logoReplacement}</div>
             ) : (
-              <Link
-                href={canMobilePageGoBack?.to}
-                className='d-flex d-lg-none align-items-center flex-lg-grow-0'>
+              <Link href='/' className='d-flex d-lg-none align-items-center flex-lg-grow-0'>
                 {canMobilePageGoBack?.status ? (
                   <div className='d-flex gap-4'>
                     <i className='fa-solid fa-chevron-left display-6' />
                     <span className='display-6'>{canMobilePageGoBack?.title}</span>
                   </div>
                 ) : (
-                  <img alt='Logo' src={toAbsoluteUrl('/potentok.png')} className='h-15px' />
+                  <img alt='Logo' src='/potentok.png' className='h-15px' />
                 )}
               </Link>
             )}

@@ -255,17 +255,19 @@ class SearchComponent {
     }
 
     // Window resize handling
-    window.addEventListener('resize', () => {
-      let timer
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => {
+        let timer
 
-      throttle(
-        timer,
-        () => {
-          this.update()
-        },
-        200
-      )
-    })
+        throttle(
+          timer,
+          () => {
+            this.update()
+          },
+          200
+        )
+      })
+    }
   }
 
   ///////////////////////
@@ -411,11 +413,11 @@ class SearchComponent {
   }
 
   // Event API
-  public on = (name: string, handler: Function) => {
+  public on = (name: string, handler: any) => {
     return EventHandlerUtil.on(this.element, name, handler)
   }
 
-  public one = (name: string, handler: Function) => {
+  public one = (name: string, handler: any) => {
     return EventHandlerUtil.one(this.element, name, handler)
   }
 
