@@ -123,7 +123,8 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                       className={clsx(menuClass, {
                         [activeClass]:
                           ['wallet'].includes(currentPath) ||
-                          pathname?.match(/(wallet)\/[a-zA-Z0-9]/gi),
+                          location?.pathname?.match(/(wallet)\/[a-zA-Z0-9]/gi) ||
+                          location?.pathname === '/',
                       })}
                       href='/wallet'>
                       나의 지갑

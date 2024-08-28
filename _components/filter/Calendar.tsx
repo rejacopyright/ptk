@@ -36,37 +36,17 @@ export const FilterDate: FC<Props> = ({
       }}>
       <Modal.Body className='p-0'>
         <div className='px-24px pt-24px radius-10 shadow-calendar'>
-          <div className='w-calendar m-auto'>
-            <div className='pb-24px'>
-              <Datepicker
-                defaultValue={value}
-                onChange={setValue}
-                minDate={minDate}
-                maxDate={maxDate}
-              />
-            </div>
-            <div className='row m-0 gap-8px py-16px'>
-              <div className='col p-0'>
-                <button
-                  type='button'
-                  onClick={() => setShow(false)}
-                  className='btn w-100 btn-sm btn-flex flex-center btn-white border border-gray-300 text-dark fw-bolder fs-14px h-40px col text-nowrap'>
-                  닫기
-                </button>
-              </div>
-              <div className='col p-0'>
-                <button
-                  type='button'
-                  onClick={() => {
-                    onFilterDate(moment(value).format('YYYY-MM-DD'))
-                    setShow(false)
-                  }}
-                  className='btn w-100 btn-sm btn-flex flex-center btn-primary fw-bolder fs-14px h-40px col text-nowrap'>
-                  적용
-                </button>
-              </div>
-            </div>
-          </div>
+          <Datepicker
+            defaultValue={value}
+            minDate={minDate}
+            maxDate={maxDate}
+            onCancel={() => setShow(false)}
+            onChange={setValue}
+            onSubmit={(e: any) => {
+              onFilterDate(moment(e).format('YYYY-MM-DD'))
+              setShow(false)
+            }}
+          />
         </div>
       </Modal.Body>
     </Modal>

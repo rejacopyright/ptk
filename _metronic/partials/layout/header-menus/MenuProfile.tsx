@@ -33,8 +33,8 @@ const MenuProfile: FC = () => {
 
       <div className='separator my-2'></div>
 
-      <div className='menu-item px-5'>
-        <Link href={`/profile`} className='menu-link px-5'>
+      <div className='menu-item-custom px-5'>
+        <Link href='/profile' className='menu-link px-5'>
           나의 페이지
         </Link>
         {/* <Link href={`/history/login`} className='menu-link px-5'>

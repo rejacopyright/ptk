@@ -164,11 +164,11 @@ class ImageInputComponent {
   }
 
   // Event API
-  public on = (name: string, handler: Function) => {
+  public on = (name: string, handler: any) => {
     return EventHandlerUtil.on(this.element, name, handler)
   }
 
-  public one = (name: string, handler: Function) => {
+  public one = (name: string, handler: any) => {
     return EventHandlerUtil.one(this.element, name, handler)
   }
 

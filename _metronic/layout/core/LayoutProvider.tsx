@@ -63,9 +63,9 @@ const LayoutProvider: FC<any> = ({ children }) => {
     setClasses(LayoutSetup.classes)
     setAttributes(LayoutSetup.attributes)
     setCSSVariables(LayoutSetup.cssVariables)
-    setTimeout(() => {
-      disableSplashScreen()
-    }, 100)
+    // setTimeout(() => {
+    disableSplashScreen()
+    // }, 100)
   }
   const value: LayoutContextModel = {
     config,
@@ -76,9 +76,9 @@ const LayoutProvider: FC<any> = ({ children }) => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      disableSplashScreen()
-    }, 100)
+    // setTimeout(() => {
+    disableSplashScreen()
+    // }, 100)
   }, [])
 
   useEffect(() => {

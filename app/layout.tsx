@@ -3,10 +3,12 @@
 import '@metronic/assets/sass/style.scss'
 import '@styles/custom.scss'
 import '@styles/potentok.scss'
+import '@styles/splash-screen.css'
 
 import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'
 import { ReduxProvider } from '@redux/Provider'
+import { ReactQueryProvider } from '@redux/ReactQueryProvider'
 import Image from 'next/image'
 
 export default function RootLayout({ children }) {
@@ -43,12 +45,17 @@ export default function RootLayout({ children }) {
           integrity='sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4'
           crossOrigin='anonymous'></script>
       </head>
-      <body suppressHydrationWarning>
-        <ReduxProvider>
-          <LayoutProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </LayoutProvider>
-        </ReduxProvider>
+      <body
+        id='kt_body'
+        className='header-fixed header-tablet-and-mobile-fixed'
+        suppressHydrationWarning>
+        <ReactQueryProvider>
+          <ReduxProvider>
+            <LayoutProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </LayoutProvider>
+          </ReduxProvider>
+        </ReactQueryProvider>
         <div id='splash-screen' className='splash-screen'>
           <Image src='/potentok.png' alt='Open Badge' width={125} height={25} priority />
         </div>
