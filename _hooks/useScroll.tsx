@@ -1,3 +1,4 @@
+'use client'
 import { throttle } from 'lodash'
 import { useEffect } from 'react'
 

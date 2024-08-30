@@ -11,26 +11,20 @@ export const authReducer = createSlice({
   name: 'root',
   initialState: {
     errors: undefined,
-    user: {},
-    preference: {},
+    data: {},
   },
   reducers: {
     setErrors: (state: any, action: any) => {
       state.errors = action?.payload
     },
     setUser: (state: any, action: any) => {
-      state.user = { ...state.user, ...action?.payload }
-    },
-    setPreference: (state: any, action: any) => {
-      state.preference = { ...state?.preference, ...action?.payload }
+      state.data = { ...state.data, ...action?.payload }
     },
     logout: (state: any) => {
-      state.user = {}
+      state.data = {}
       state.errors = undefined
-      state.currentUser = {}
-      state.preference = {}
       // googleLogout()
-      localStorage.removeItem(`persist:global`)
+      localStorage.removeItem(`persist:${persistKey}`)
       localStorage.removeItem(`REACT_QUERY_OFFLINE_CACHE`)
       Cookies.remove(`token`)
     },
@@ -41,9 +35,9 @@ export const authReducer = createSlice({
 export const persistedAuthReducer = () =>
   persistReducer(
     {
-      key: 'global',
+      key: persistKey,
       version: 1,
-      whitelist: ['errors', 'user', 'preference'],
+      whitelist: ['errors', 'data'],
       storage: storageLocal,
     },
     authReducer.reducer

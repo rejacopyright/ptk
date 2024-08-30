@@ -13,7 +13,14 @@ export const NavbarDesktop = ({ _language }: any) => {
       style={{ height: '56px' }}>
       <div className='d-flex column gap-5 flex-fill align-items-center'>
         <div className='d-flex column gap-2 align-items-center'>
-          <Image alt='Logo' src='/potentok.png' className='' width={125} height={25} priority />
+          <Image
+            alt='Logo'
+            src='/logo/potentok.png'
+            className=''
+            width={125}
+            height={25}
+            priority
+          />
         </div>
       </div>
       <div className='d-flex flex-row-reverse justify-content-end-reverse column flex-fill gap-7 align-items-center'>
@@ -80,7 +87,7 @@ export const NavbarMobile = ({ _language }: any) => {
       <div className='container d-flex column align-items-center justify-content-between flex-wrap gap-4 py-5 '>
         <div className='d-flex column gap-10 flex-fill align-items-center justify-content-center'>
           <div className='d-flex gap-2 align-items-center'>
-            <img alt='Logo' src='/potentok.png' className='h-30px' />
+            <img alt='Logo' src='/logo/potentok.png' className='h-30px' />
           </div>
           <div className='container position-absolute start-0'>
             <button className='btn btn-primary' onClick={toggleMenu}>

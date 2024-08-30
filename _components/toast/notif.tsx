@@ -1,5 +1,3 @@
-'use client'
-import 'react-toastify/dist/ReactToastify.css'
 import './style.notif.scss'
 
 import { toast } from 'react-toastify'

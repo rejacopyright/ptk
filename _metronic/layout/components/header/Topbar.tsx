@@ -14,7 +14,7 @@ const toolbarButtonMarginClass = 'mx-0 header-right',
   toolbarButtonIconSizeClass = 'svg-icon-2x'
 
 const Topbar: FC = () => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const email: any = user?.mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')?.user_eml
   const { config } = useLayout()
 

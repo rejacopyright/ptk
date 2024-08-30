@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 
 const MobileMenuDrawer: FC<any> = () => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const email: any = user?.mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')?.user_eml
   return (
     <div
@@ -21,7 +21,7 @@ const MobileMenuDrawer: FC<any> = () => {
       <div className='card w-100 shadow-none rounded-0'>
         <div className='card-header d-flex align-items-center' id='kt_menu_header'>
           {/* <h3 className='card-title fw-bolder text-dark'>Test Menu</h3> */}
-          <img alt='Logo' src='/potentok.png' className='h-28px' />
+          <img alt='Logo' src='/logo/potentok.png' className='h-28px' />
 
           <div className='card-toolbar'>
             <button

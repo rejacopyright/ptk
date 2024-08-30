@@ -66,7 +66,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
         {!aside?.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
             <Link href='/' className='d-lg-none'>
-              <img alt='Logo' src='/potentok.png' className='h-20px' />
+              <img alt='Logo' src='/logo/potentok.png' className='h-20px' />
             </Link>
           </div>
         )}
@@ -84,7 +84,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                     <span className='display-6'>{canMobilePageGoBack?.title}</span>
                   </div>
                 ) : (
-                  <img alt='Logo' src='/potentok.png' className='h-15px' />
+                  <img alt='Logo' src='/logo/potentok.png' className='h-15px' />
                 )}
               </Link>
             )}
@@ -97,7 +97,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
             {/* begin::Navbar */}
             <div className='header-left'>
               <Link href='/' className='d-none d-lg-flex flex-shrink'>
-                <img src='/potentok.png' alt='' className='' />
+                <img src='/logo/potentok.png' alt='' className='' />
               </Link>
             </div>
             {header.left === 'menu' && (

@@ -42,7 +42,6 @@ module.exports = {
     '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    // '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'error',

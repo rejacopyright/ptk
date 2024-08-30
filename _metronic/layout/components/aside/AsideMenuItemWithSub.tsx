@@ -1,8 +1,8 @@
 import { checkIsActive, KTSVG } from '@helpers'
+import { useLocation } from '@hooks'
 import { useLayout } from '@metronic/layout/core'
 import clsx from 'clsx'
 import React from 'react'
-import { useLocation } from 'react-router'
 
 type Props = {
   to: string
@@ -21,7 +21,7 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
   fontIcon,
   hasBullet,
 }) => {
-  const { pathname } = useLocation()
+  const { pathname }: any = useLocation()
   const isActive = checkIsActive(pathname, to)
   const { config } = useLayout()
   const { aside } = config

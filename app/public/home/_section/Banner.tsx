@@ -25,7 +25,7 @@ export const PrimaryBanner: FC<any> = () => {
         <p className='text-white fs-28px fw-bolder ls-n1'>나의 경험을 증명할 수 있는 수단</p>
         <div className=''>
           <Image
-            src='/potentok-white.png'
+            src='/logo/potentok-white.png'
             className='my-36px'
             alt=''
             width={336}

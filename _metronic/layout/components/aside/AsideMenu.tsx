@@ -1,3 +1,5 @@
+import { defineRole } from '@components/layouts/LayoutConfig'
+import { useLocation } from '@hooks'
 import {
   DrawerComponent,
   MenuComponent,
@@ -6,8 +8,6 @@ import {
 } from '@metronic/assets/ts/components'
 import clsx from 'clsx'
 import React, { useEffect, useRef } from 'react'
-import { useLocation } from 'react-router'
-import { defineRole } from 'src/routes'
 
 type Props = {
   asideMenuCSSClasses: string[]

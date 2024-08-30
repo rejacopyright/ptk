@@ -25,7 +25,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 const UserLayout = ({ children }) => {
   const pathname = usePathname()
   const location = useLocation()
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const Navbar: any = defineRole?.navbar
   const Header: any = defineRole?.header || DefaultHeader
   const sidebar: any = defineRole?.sidebar
@@ -44,8 +44,10 @@ const UserLayout = ({ children }) => {
 
   // location?.url
   useEffect(() => {
+    const isPublic: any = location?.pathname?.startsWith('/public')
+
     setHasToken(Boolean(token))
-    if (!token) {
+    if (!token && !isPublic) {
       redirect(`/login?request=${location?.urlBtoa}`)
     }
 

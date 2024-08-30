@@ -1,17 +1,25 @@
 /* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-sync-scripts */
+import 'react-toastify/dist/ReactToastify.css'
 import '@metronic/assets/sass/style.scss'
 import '@styles/custom.scss'
 import '@styles/potentok.scss'
 import '@styles/splash-screen.css'
 
+import axios from '@api/axios'
 import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'
 import { ReduxProvider } from '@redux/Provider'
 import { ReactQueryProvider } from '@redux/ReactQueryProvider'
+import { cookies } from 'next/headers'
 import Image from 'next/image'
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookiesStore = cookies()
+  const token: any = cookiesStore.get('token')?.value
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  }
   return (
     <html lang='kr'>
       <head>
@@ -38,12 +46,11 @@ export default function RootLayout({ children }) {
           crossOrigin='anonymous'
           referrerPolicy='no-referrer'
         />
-        {/* SPLASH SCREEN */}
-        <link rel='stylesheet' id='layout-styles-anchor' href='./splash-screen.css' />
         <script
           src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js'
           integrity='sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4'
           crossOrigin='anonymous'></script>
+        <link rel='shortcut icon' href='/favicon.png' />
       </head>
       <body
         id='kt_body'
@@ -57,7 +64,7 @@ export default function RootLayout({ children }) {
           </ReduxProvider>
         </ReactQueryProvider>
         <div id='splash-screen' className='splash-screen'>
-          <Image src='/potentok.png' alt='Open Badge' width={125} height={25} priority />
+          <Image src='/logo/potentok.png' alt='Open Badge' width={125} height={25} priority />
         </div>
         <div id='root-modals'></div>
       </body>

@@ -8,7 +8,7 @@ import { Modal } from 'react-bootstrap'
 import { shallowEqual, useSelector } from 'react-redux'
 
 const Index: FC<any> = ({ show, setShow, countDown }) => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
 
   const [loadingBtn, setLoadingBtn] = useState<boolean>(false)
 

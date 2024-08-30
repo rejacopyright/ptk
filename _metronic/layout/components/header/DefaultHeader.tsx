@@ -37,7 +37,7 @@ export const DefaultHeader: FC<any> = () => {
         {!aside.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
             <Link href='/wallet' className='d-lg-none'>
-              <img alt='Logo' src='/potentok.png' className='h-20px' />
+              <img alt='Logo' src='/logo/potentok.png' className='h-20px' />
             </Link>
           </div>
         )}
@@ -45,7 +45,7 @@ export const DefaultHeader: FC<any> = () => {
 
         {aside.display && (
           <Link href='/' className='d-flex d-lg-none align-items-center flex-grow-1 flex-lg-grow-0'>
-            <img alt='Logo' src='/potentok.png' className='h-20px mx-2' />
+            <img alt='Logo' src='/logo/potentok.png' className='h-20px mx-2' />
           </Link>
         )}
 

@@ -9,6 +9,7 @@ import Tooltip from '@components/tooltip'
 import { blobToBase64, configClass, detectMobileScreen, getJWTPayload, KTSVG } from '@helpers'
 import { useDeepEffect, useSize } from '@hooks'
 import { CustomLogo, PageTitle } from '@metronic/layout/core'
+import { setWalletDetail } from '@redux'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import moment from 'moment'
 import { useRouter } from 'next/navigation'
@@ -20,8 +21,7 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
   achievement,
 }) => {
   const router = useRouter()
-
-  const { jwt: _jwt, name, issuer, imgFile, ACHIEVEMENT_TYPE_KR } = detail || {}
+  const { jwt, name, issuer, imgFile, ACHIEVEMENT_TYPE_KR } = detail || {}
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
 
@@ -43,7 +43,6 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
 
   // const badgeImageData: any = '/media/placeholder/badge.png'
   const badgeImageData: any = badgeImageQuery?.data?.base64 || '/media/placeholder/badge.png'
-  const _badgeImageBlob: any = badgeImageQuery?.data?.blob || undefined
 
   useSize(() => {
     setIsMobile(detectMobileScreen())
@@ -52,8 +51,10 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
   return (
     <div
       className='d-flex flex-column card-2 bg-white radius-15 cursor-default card-badge-xxx p-24px'
-      onClick={() => {
-        router.push(`/wallet/detail`, {
+      onClick={async () => {
+        await setWalletDetail({ img: badgeImageData, jwt, ...detail })
+        router.push(`/wallet/detail/${detail?.USER_ID}/${detail?.USER_BDG_ID}?id=${jwt}`, {
+          scroll: false,
           // state: { img: badgeImageData, imgBlob: badgeImageBlob, jwt, ...detail },
         })
       }}>
@@ -104,7 +105,7 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
 }
 
 const Index: FC<any> = () => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const queryClient = useQueryClient()
 
   const [filterAchievement, setFilterAchievement] = useState<any>([])

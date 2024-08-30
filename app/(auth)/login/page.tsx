@@ -123,7 +123,7 @@ const Login: FC = () => {
                   <div className='text-center' style={{ marginBottom: '36px' }}>
                     <Image
                       alt='Logo'
-                      src='/potentok.png'
+                      src='/logo/potentok.png'
                       width={168}
                       height={34}
                       className='mb-8px'

@@ -12,7 +12,13 @@ const AuthPage: FC<any> = ({ children }) => {
         <div className='col-12 text-center text-lg-start p-0'>
           <div className='d-flex align-items-center justify-content-between auth-header'>
             <Link href='/'>
-              <Image src='/potentok.png' alt='potentok-logo' width={158} height={32} priority />
+              <Image
+                src='/logo/potentok.png'
+                alt='potentok-logo'
+                width={158}
+                height={32}
+                priority
+              />
             </Link>
             <div className='d-flex gap-3'>
               <Link

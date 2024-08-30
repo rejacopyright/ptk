@@ -1,5 +1,3 @@
-'use client'
-import 'react-toastify/dist/ReactToastify.css'
 import './style.custom.scss'
 
 import { toast, ToastOptions } from 'react-toastify'

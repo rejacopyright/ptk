@@ -8,7 +8,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 // import { Languages } from './Languages'
 
 const MenuProfile: FC = () => {
-  const userStore: any = useSelector(({ user }: any) => user, shallowEqual)
+  const userStore: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const [user, setUser] = useState<any>({})
   const email: any = user?.mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')?.user_eml
   useEffect(() => {

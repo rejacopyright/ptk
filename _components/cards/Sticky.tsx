@@ -1,3 +1,4 @@
+'use client'
 import { useSize } from '@hooks'
 import { useLayout } from '@metronic/layout/core'
 import { CSSProperties, FC, useEffect, useMemo, useRef, useState } from 'react'

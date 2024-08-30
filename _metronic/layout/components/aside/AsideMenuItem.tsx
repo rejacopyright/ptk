@@ -1,9 +1,9 @@
 import { checkIsActive, KTSVG } from '@helpers'
+import { useLocation } from '@hooks'
 import { useLayout } from '@metronic/layout/core'
 import clsx from 'clsx'
+import Link from 'next/link'
 import React from 'react'
-import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom'
 
 type Props = {
   to: string
@@ -22,14 +22,14 @@ const AsideMenuItem: React.FC<Props> = ({
   fontIcon,
   hasBullet = false,
 }) => {
-  const { pathname } = useLocation()
+  const { pathname }: any = useLocation()
   const isActive = checkIsActive(pathname, to)
   const { config } = useLayout()
   const { aside } = config
 
   return (
     <div className='menu-item'>
-      <Link className={clsx('menu-link without-sub', { active: isActive })} to={to}>
+      <Link className={clsx('menu-link without-sub', { active: isActive })} href={to}>
         {hasBullet && (
           <span className='menu-bullet'>
             <span className='bullet bullet-dot'></span>

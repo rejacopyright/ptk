@@ -8,7 +8,7 @@ export const valueKey = 'achievement_type'
 export const labelKey = 'achievement_type_kr'
 
 export const FilterCategory: FC<any> = ({ filterCategory, onFilterCategory = () => '' }) => {
-  const user: any = useSelector(({ user }: any) => user, shallowEqual)
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
 
   const [menuCardIsShown, setMenuCardIsShown] = useState<boolean>(false)
   const [checkedItem, setCheckedItem] = useState<any>([])

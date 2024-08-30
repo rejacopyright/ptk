@@ -36,7 +36,7 @@ const AsideDefault: FC<any> = ({ sidebar }) => {
                 className='logo'
                 width={125}
                 height={25}
-                src='/potentok.png'
+                src='/logo/potentok.png'
                 priority
               />
             </div>

@@ -16,7 +16,7 @@ export const issueBadge = (data?: object) => {
   })
 }
 
-export const getDetailBadge = (data?: object) => {
+export const getDetailBadge = (data: { data?: string }) => {
   return axios({
     method: 'post',
     url: 'badge/public/validate',
