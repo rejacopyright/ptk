@@ -1,9 +1,8 @@
-import { createShareURL, getDetailBadge } from '@api/badge'
+import { getDetailBadge } from '@api/badge'
 import { getBufferIMG, getPublicBadgeDetail } from '@api/public'
 import { Sticky } from '@components/cards/Sticky'
 import { APP_HOME_PATH, bufferUrlToBase64, KTSVG } from '@helpers'
 import { CustomLogo } from '@metronic/layout/core'
-import last from 'lodash/last'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -15,7 +14,6 @@ const Index: FC<any> = async ({ params, searchParams }) => {
   // const id: any = decodedJWT ? atob(decodedJWT) : undefined
   const paramsLength: any = params?.badgeId?.filter((f: any) => f !== 'undefined')?.length
   const USER_ID: any = paramsLength > 1 ? params?.badgeId?.[0] : undefined
-  const USER_BDG_ID: any = paramsLength > 1 ? params?.badgeId?.[1] : undefined
   const sharingToken = paramsLength === 1 ? params?.badgeId?.[0] : undefined
   const isPublic: boolean = Boolean(sharingToken && !USER_ID && paramsLength === 1)
 
@@ -25,21 +23,6 @@ const Index: FC<any> = async ({ params, searchParams }) => {
   let detailBadgeData: any = {}
 
   // const [showModalDelete, setShowModalDelete] = useState<boolean>(false)
-
-  // GET SHARING TOKEN
-  let shareURLAPI: any = undefined
-  const shareURLParams: any = {
-    user_id: USER_ID,
-    user_bdg_id: USER_BDG_ID,
-  }
-
-  if (!isPublic) {
-    try {
-      shareURLAPI = await createShareURL(shareURLParams)
-    } catch {}
-  }
-
-  const shareURL: any = last(shareURLAPI?.data?.message?.share_url?.split('/') || []) || undefined
 
   // FOR PUBLIC
   if (isPublic) {
@@ -51,8 +34,6 @@ const Index: FC<any> = async ({ params, searchParams }) => {
           (await getDetailBadge({ data: getPublicBadgeDetailData?.BADGE }))?.data?.message?.vc || {}
       }
       const imgURL: any = await getBufferIMG(sharingToken)
-      // console.log('badgePublicImage =============> ', URL.createObjectURL(imgURL))
-      // const contentType: any = imgURL?.headers?.get('Content-Type')?.split(';')?.[0] || 'image/png'
       badgePublicImage = bufferUrlToBase64(imgURL)
     } catch {
       badgePublicImage = '/media/placeholder/badge.png'
@@ -126,7 +107,6 @@ const Index: FC<any> = async ({ params, searchParams }) => {
         detailBadge={detailBadge}
         badgePublicImage={badgePublicImage}
         isPublic={isPublic}
-        shareURL={shareURL}
         shareIsLoading={false}
       />
       <ExtraCards detailBadge={detailBadge} />

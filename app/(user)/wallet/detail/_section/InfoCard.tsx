@@ -8,17 +8,10 @@ interface Props {
   detailBadge?: any
   badgePublicImage?: any
   isPublic: boolean
-  shareURL?: string
   shareIsLoading: boolean
 }
 
-const Index: FC<Props> = ({
-  detailBadge,
-  badgePublicImage,
-  isPublic,
-  shareURL,
-  shareIsLoading,
-}) => {
+const Index: FC<Props> = ({ detailBadge, badgePublicImage, isPublic, shareIsLoading }) => {
   const evidence: any = detailBadge?.evidence?.[0]?.ext || {}
   const achievement: any = detailBadge?.credentialSubject?.achievement || {}
   const issuanceDate: any = detailBadge?.issuanceDate
@@ -98,14 +91,7 @@ const Index: FC<Props> = ({
         <div className='fs-16px w-lg-450px fw-400' style={{ whiteSpace: 'pre-line' }}>
           {achievement?.criteria?.narrative?.split('\\n')?.join('\n') || ''}
         </div>
-        {!isPublic && (
-          <ActionButtons
-            state={{}}
-            detailBadge={detailBadge}
-            shareURL={shareURL}
-            shareIsLoading={shareIsLoading}
-          />
-        )}
+        {!isPublic && <ActionButtons detailBadge={detailBadge} shareIsLoading={shareIsLoading} />}
       </div>
     </div>
   )

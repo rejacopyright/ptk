@@ -1,16 +1,23 @@
 'use client'
 import { API_SERVER } from '@api/axios'
-import { getBlockchainVerification } from '@api/badge'
+import { createShareURL, getBlockchainVerification } from '@api/badge'
 import KakaoShare from '@components/button/KakaoShare'
 import { KTSVG } from '@helpers'
-import { FC, useState } from 'react'
+import last from 'lodash/last'
+import { FC, useEffect, useState } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, XIcon } from 'react-share'
 
 import ModalShare from './ModalShare'
 import ModalViewPDF from './ModalViewPDF'
 
-const Index: FC<any> = ({ detailBadge, shareURL, shareIsLoading }) => {
+interface Props {
+  detailBadge: any
+  shareIsLoading: boolean
+}
+
+const Index: FC<Props> = ({ detailBadge, shareIsLoading }) => {
+  const [shareURL, setShareURL] = useState<any>(false)
   const [showModalShare, setShowModalShare] = useState<boolean>(false)
 
   const walletDetail: any = useSelector(({ wallet }: any) => wallet?.detail, shallowEqual)
@@ -46,6 +53,21 @@ const Index: FC<any> = ({ detailBadge, shareURL, shareIsLoading }) => {
       })
       .finally(() => setBlockchainBtnIsLoading(false))
   }
+
+  useEffect(() => {
+    if (USER_ID && USER_BDG_ID) {
+      const shareURLParams: any = {
+        user_id: USER_ID,
+        user_bdg_id: USER_BDG_ID,
+      }
+      createShareURL(shareURLParams)
+        .then(({ data }: any) => {
+          const res: any = last(data?.message?.share_url?.split('/') || []) || undefined
+          setShareURL(res)
+        })
+        .catch(() => '')
+    }
+  }, [USER_ID, USER_BDG_ID])
 
   return (
     <>
