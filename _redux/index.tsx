@@ -6,7 +6,7 @@ import { authReducer, persistedAuthReducer } from './auth'
 import { tokenReducer } from './token'
 import { persistedWalletReducer, walletReducer } from './wallet'
 
-// Storage
+// Reducers
 const allReducers = combineReducers({
   user: persistedAuthReducer(),
   wallet: persistedWalletReducer(),
