@@ -53,7 +53,7 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
       className='d-flex flex-column card-2 bg-white radius-15 cursor-default card-badge-xxx p-24px'
       onClick={async () => {
         await setWalletDetail({ img: badgeImageData, jwt, ...detail })
-        router.push(`/wallet/detail/${detail?.USER_ID}/${detail?.USER_BDG_ID}?id=${jwt}`, {
+        router.push(`/wallet/detail/${detail?.USER_ID}/${detail?.USER_BDG_ID}/${jwt}`, {
           scroll: false,
           // state: { img: badgeImageData, imgBlob: badgeImageBlob, jwt, ...detail },
         })

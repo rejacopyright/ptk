@@ -1,52 +1,16 @@
-import { getDetailBadge } from '@api/badge'
-import { getBufferIMG, getPublicBadgeDetail } from '@api/public'
 import { Sticky } from '@components/cards/Sticky'
-import { APP_HOME_PATH, bufferUrlToBase64, KTSVG } from '@helpers'
+import { APP_HOME_PATH, KTSVG } from '@helpers'
 import { CustomLogo } from '@metronic/layout/core'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import { getDataBadgeQuery } from '../_libs/getDataBadge'
 import ExtraCards from '../_section/ExtraCards'
 import InfoCard from '../_section/InfoCard'
 
-const Index: FC<any> = async ({ params, searchParams }) => {
-  const id: any = searchParams?.id
-  // const id: any = decodedJWT ? atob(decodedJWT) : undefined
-  const paramsLength: any = params?.badgeId?.filter((f: any) => f !== 'undefined')?.length
-  const USER_ID: any = paramsLength > 1 ? params?.badgeId?.[0] : undefined
-  const sharingToken = paramsLength === 1 ? params?.badgeId?.[0] : undefined
-  const isPublic: boolean = Boolean(sharingToken && !USER_ID && paramsLength === 1)
-
-  let badgePublicToken: any = {}
-  let badgePublicImage: any = undefined
-  let detailBadgeAPI: any = {}
-  let detailBadgeData: any = {}
-
-  // const [showModalDelete, setShowModalDelete] = useState<boolean>(false)
-
-  // FOR PUBLIC
-  if (isPublic) {
-    try {
-      if (sharingToken) {
-        const getPublicBadgeDetailAPI: any = (await getPublicBadgeDetail(sharingToken))?.data
-        const getPublicBadgeDetailData: any = getPublicBadgeDetailAPI?.message?.reason
-        badgePublicToken =
-          (await getDetailBadge({ data: getPublicBadgeDetailData?.BADGE }))?.data?.message?.vc || {}
-      }
-      const imgURL: any = await getBufferIMG(sharingToken)
-      badgePublicImage = bufferUrlToBase64(imgURL)
-    } catch {
-      badgePublicImage = '/media/placeholder/badge.png'
-    }
-  } else if (USER_ID) {
-    try {
-      detailBadgeAPI = (await getDetailBadge({ data: id }))?.data
-      detailBadgeData = detailBadgeAPI?.message?.vc
-    } catch {}
-  }
-
-  const detailBadge: any = !isPublic ? detailBadgeData : badgePublicToken || {}
-  const _achievement: any = detailBadge?.credentialSubject?.achievement || {}
+const Index: FC<any> = async ({ params }) => {
+  const getData = await getDataBadgeQuery(params)
+  const { USER_ID, isPublic, badgePublicImage, detail } = getData || {}
 
   if (!USER_ID && !isPublic) {
     return (
@@ -104,12 +68,12 @@ const Index: FC<any> = async ({ params, searchParams }) => {
         </>
       )}
       <InfoCard
-        detailBadge={detailBadge}
+        detailBadge={detail}
         badgePublicImage={badgePublicImage}
         isPublic={isPublic}
         shareIsLoading={false}
       />
-      <ExtraCards detailBadge={detailBadge} />
+      <ExtraCards detailBadge={detail} />
       {/* <div className='d-none xxx justify-content-end gap-2 py-50px'>
             <div
               className='d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 gap-lg-0 btn btn-sm btn-light-danger border border-danger'
