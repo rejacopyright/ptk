@@ -99,7 +99,7 @@ export const InputOTP: FC<InputOTPTypes> = ({ digits = 4, type = 'number' }) => 
               e.preventDefault()
             }
           }}
-          ref={(reference) => (otpBoxReference.current[index] = reference)}
+          ref={(reference) => (otpBoxReference.current[index] = reference) as any}
           className={`form-control border-primary w-60px h-75px text-center fs-3x text-dark fw-bolder`}
         />
       ))}

@@ -70,7 +70,7 @@ const UserLayout = ({ children }) => {
     return () => {
       clearInterval(countDown)
     }
-  }, [location?.urlBtoa, token])
+  }, [location?.pathname, location?.urlBtoa, token])
 
   useSize(() => {
     setIsMobile(detectMobileScreen())

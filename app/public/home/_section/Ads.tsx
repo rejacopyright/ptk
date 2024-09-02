@@ -7,7 +7,7 @@ export const HomepageAds: FC<any> = () => {
         className='d-flex flex-center position-relative'
         style={{ marginTop: '150px', marginBottom: '150px' }}>
         <div className='position-absolute' style={{ zIndex: 0 }}>
-          <img src='/media/assets/winner.png' className='w-100' />
+          <img alt='' src='/media/assets/winner.png' className='w-100' />
         </div>
         <div className='text-center' style={{ zIndex: 1 }}>
           <div className='fs-28px fw-bolder'>경험을 멈추지 마세요.</div>

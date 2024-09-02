@@ -34,6 +34,7 @@ export const CardBadge: FC<CardBadgeProps> = ({ title }) => {
                   </div>
                 </div>
                 <img
+                  alt=''
                   src='/media/placeholder/badge.png'
                   className='my-20px'
                   style={{ width: '150px', height: '150px' }}

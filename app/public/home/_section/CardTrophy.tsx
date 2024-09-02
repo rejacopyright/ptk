@@ -18,7 +18,7 @@ export const CardTrophy: FC<CardBadgeProps> = ({ title }) => {
     <div className='container content position-relative overflow-hidden'>
       <div className='d-flex flex-center' style={{ marginTop: '150px', marginBottom: '150px' }}>
         <div className='position-absolute' style={{ zIndex: 0 }}>
-          <img src='/media/assets/graph.png' className='w-100' />
+          <img alt='' src='/media/assets/graph.png' className='w-100' />
         </div>
         <div className='text-center' style={{ zIndex: 1 }}>
           <div className='text-center'>{title}</div>
