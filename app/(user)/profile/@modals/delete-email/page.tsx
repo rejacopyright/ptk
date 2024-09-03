@@ -1,22 +1,39 @@
+'use client'
+
 import { deleteEmail } from '@api/profile'
 import { ToastMessage } from '@components/toast'
+import { setUser } from '@redux'
+import { usePathname, useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { Modal } from 'react-bootstrap'
+import { shallowEqual, useSelector } from 'react-redux'
 
 const Index: FC<{
-  show: boolean
-  setShow: (e: boolean) => void
-  detail: any
   onSubmit?: (e: any) => void
-}> = ({ show, setShow, detail, onSubmit = () => '' }) => {
+}> = ({ onSubmit = () => '' }) => {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const { user, profile }: any = useSelector(
+    ({ user, profile }: any) => ({ user: user?.data, profile }),
+    shallowEqual
+  )
+  const { tmpEmail } = profile || {}
+
   const [loading, setLoading] = useState<boolean>(false)
+
+  const closeModal: any = () => router.replace('/profile', { scroll: false })
 
   const handleOnSubmit = () => {
     setLoading(true)
-    deleteEmail({ user_id: detail?.user_id, user_eml: detail?.user_eml })
+    deleteEmail({ user_id: tmpEmail?.user_id, user_eml: tmpEmail?.user_eml })
       .then(() => {
-        setShow(false)
-        onSubmit(detail?.user_eml)
+        closeModal()
+        onSubmit(tmpEmail?.user_eml)
+        const filteredEmails: any = user?.mails?.filter(
+          ({ user_eml }: any) => user_eml !== tmpEmail?.user_eml
+        )
+        setUser({ mails: filteredEmails })
         ToastMessage({ type: 'success', message: '이메일이 성공적으로 제거되었습니다.' })
       })
       .catch(({ response }: any) => {
@@ -30,11 +47,11 @@ const Index: FC<{
       centered
       dialogClassName='modal-md w-lg-400px'
       contentClassName='radius-15 shadow-lg'
-      show={show}
-      onHide={() => setShow(false)}>
+      show={pathname?.endsWith('delete-email')}
+      onHide={closeModal}>
       <Modal.Body className='p-24px'>
         <div className='text-center mb-24px'>
-          <span className='fw-bolder'>{detail?.user_eml || 'email'}</span>
+          <span className='fw-bolder'>{tmpEmail?.user_eml || 'email'}</span>
           <span className='mx-1'>을 삭제하시겠습니까</span>
           <span>?</span>
         </div>
@@ -42,7 +59,7 @@ const Index: FC<{
           <div className='col'>
             <div
               className='btn btn-flex w-100 btn-white border border-gray-300 text-dark fw-bolder flex-center px-12px'
-              onClick={() => setShow(false)}>
+              onClick={closeModal}>
               아니오
             </div>
           </div>
