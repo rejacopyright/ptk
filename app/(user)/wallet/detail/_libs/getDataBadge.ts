@@ -3,13 +3,14 @@ import { getBufferIMG, getPublicBadgeDetail } from '@api/public'
 import { bufferUrlToBase64 } from '@helpers'
 import { cache } from 'react'
 
-export const getDataBadgeQuery: any = cache(async (params) => {
-  const paramsLength: any = params?.badgeId?.filter((f: any) => f !== 'undefined')?.length
+export const preload = (params: any, id: any) => {
+  void getDataBadgeQuery(params, id)
+}
 
-  const id: any = paramsLength === 3 ? params?.badgeId?.[2] : undefined
-  const USER_ID: any = paramsLength === 3 ? params?.badgeId?.[0] : undefined
-  const sharingToken = paramsLength === 1 ? params?.badgeId?.[0] : undefined
-  const isPublic: boolean = Boolean(sharingToken && !USER_ID && paramsLength === 1)
+export const getDataBadgeQuery: any = cache(async (params: any, id?: any) => {
+  const USER_ID: any = params?.badgeId?.[0] || undefined
+  const sharingToken = params?.sharingToken || undefined
+  const isPublic: boolean = Boolean(sharingToken && !USER_ID)
 
   let badgePublicToken: any = {}
   let badgePublicImage: any = undefined

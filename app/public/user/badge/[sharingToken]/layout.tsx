@@ -1,11 +1,9 @@
 import { API_SERVER } from '@api/axios'
-
-import { getDataBadgeQuery } from '../_libs/getDataBadge'
-
-export const dynamic = 'force-dynamic'
+import UserLayout from '@pages/(user)/layout'
+import { getDataBadgeQuery } from '@pages/(user)/wallet/detail/_libs/getDataBadge'
 
 export async function generateMetadata({ params }, parent) {
-  const getData: any = await getDataBadgeQuery(params)
+  const getData: any = await getDataBadgeQuery(params, undefined)
   const { achievement, sharingToken }: any = getData || {}
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
@@ -26,5 +24,5 @@ export async function generateMetadata({ params }, parent) {
 }
 
 export default async function Index({ children }) {
-  return children
+  return <UserLayout>{children}</UserLayout>
 }

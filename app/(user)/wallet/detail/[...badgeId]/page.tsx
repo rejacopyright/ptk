@@ -4,12 +4,16 @@ import { CustomLogo } from '@metronic/layout/core'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { getDataBadgeQuery } from '../_libs/getDataBadge'
+import { getDataBadgeQuery, preload } from '../_libs/getDataBadge'
 import ExtraCards from '../_section/ExtraCards'
 import InfoCard from '../_section/InfoCard'
 
-const Index: FC<any> = async ({ params }) => {
-  const getData = await getDataBadgeQuery(params)
+const Index: FC<any> = async ({ params, searchParams }) => {
+  const { id } = searchParams || {}
+
+  preload(params, id)
+
+  const getData = await getDataBadgeQuery(params, id)
   const { USER_ID, isPublic, badgePublicImage, detail } = getData || {}
 
   if (!USER_ID && !isPublic) {

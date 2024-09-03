@@ -126,7 +126,8 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                           location?.pathname?.match(/(wallet)\/[a-zA-Z0-9]/gi) ||
                           location?.pathname === '/',
                       })}
-                      href='/wallet'>
+                      href='/wallet'
+                      scroll={false}>
                       나의 지갑
                     </Link>
                     {/* <Link

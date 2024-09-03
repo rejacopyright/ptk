@@ -30,7 +30,7 @@
     "strictFunctionTypes": false,
     "noImplicitAny": false,
     "paths": {
-      "@pages/*": ["pages/*"],
+      "@pages/*": ["app/*"],
       "@styles/*": ["_styles/*"],
       "@auth": ["pages/user/auth"],
       "@auth/*": ["pages/user/auth/*"],
