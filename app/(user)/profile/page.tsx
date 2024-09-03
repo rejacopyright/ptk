@@ -147,7 +147,7 @@ const Index: FC<any> = () => {
                 </div>
                 <div className='d-flex align-items-center gap-8px'>
                   <div
-                    onClick={() => navigate.push('/profile/password/change')}
+                    onClick={() => navigate.push('/profile/password/change', { scroll: false })}
                     className='btn btn-flex btn-white border border-gray-300 text-dark fw-bolder flex-center px-12px text-nowrap'
                     style={{ height: '36px' }}>
                     비밀번호 변경
