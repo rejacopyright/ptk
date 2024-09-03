@@ -2,14 +2,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 
-import { authReducer, persistedAuthReducer } from './auth'
-import { tokenReducer } from './token'
-import { persistedWalletReducer, walletReducer } from './wallet'
+import { authReducer, persistedAuthReducer } from './reducers/auth'
+import { persistedProfileReducer, profileReducer } from './reducers/profile'
+import { tokenReducer } from './reducers/token'
+import { persistedWalletReducer, walletReducer } from './reducers/wallet'
 
 // Reducers
 const allReducers = combineReducers({
   user: persistedAuthReducer(),
   wallet: persistedWalletReducer(),
+  profile: persistedProfileReducer(),
 })
 
 // Store - Redux
@@ -36,6 +38,7 @@ export const {
 } = authReducer?.actions
 export const { setToken: updateToken } = tokenReducer?.actions
 export const { setWalletDetail: updateWalletDetail } = walletReducer?.actions
+export const { setTmpEmail: updateTmpEmail } = profileReducer?.actions
 
 // USER & AUTH DISPATCHER
 export const setErrors = (e: any) => store.dispatch(dispatchErrors(e))
@@ -45,3 +48,6 @@ export const logout = () => store.dispatch(logoutApp())
 
 // WALLET DISPATCHER
 export const setWalletDetail = (e: any) => store.dispatch(updateWalletDetail(e))
+
+// PROFILE DISPATCHER
+export const setTmpEmail = (e: any) => store.dispatch(updateTmpEmail(e))

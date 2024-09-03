@@ -4,7 +4,7 @@ import { Sticky } from '@components/cards/Sticky'
 import { CircleLoader, TextLoader } from '@components/loader'
 import { APP_HOME_PATH, KTSVG } from '@helpers'
 import { CustomLogo, PageTitle } from '@metronic/layout/core'
-import { logout } from '@redux'
+import { logout, setTmpEmail } from '@redux'
 import { useQuery } from '@tanstack/react-query'
 import { usePathname, useRouter } from 'next/navigation'
 import { FC, useMemo } from 'react'
@@ -147,7 +147,7 @@ const Index: FC<any> = () => {
                 </div>
                 <div className='d-flex align-items-center gap-8px'>
                   <div
-                    onClick={() => navigate('/profile/password/change')}
+                    onClick={() => navigate.push('/profile/password/change')}
                     className='btn btn-flex btn-white border border-gray-300 text-dark fw-bolder flex-center px-12px text-nowrap'
                     style={{ height: '36px' }}>
                     비밀번호 변경
@@ -177,8 +177,8 @@ const Index: FC<any> = () => {
                   <div
                     className='btn btn-flex flex-center w-20px h-20px p-0'
                     onClick={() => {
-                      // setTmpEmailDetail(item)
-                      // setShowModalDeleteSecondaryEmail(true)
+                      setTmpEmail(item)
+                      navigate.replace('/profile/delete-email', { scroll: false })
                     }}>
                     <i className='las la-times p-0 fs-20px text-dark mt-2px' />
                   </div>

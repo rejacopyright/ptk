@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 
-import storageLocal from './conditionalStorage'
+import storageLocal from '../utils/conditionalStorage'
 
 // Original Reducer
 export const walletReducer = createSlice({
