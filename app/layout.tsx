@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-sync-scripts */
-import 'react-toastify/dist/ReactToastify.css'
 import '@metronic/assets/sass/style.scss'
 import '@styles/custom.scss'
 import '@styles/potentok.scss'

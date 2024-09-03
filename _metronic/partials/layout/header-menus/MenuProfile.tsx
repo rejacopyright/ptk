@@ -11,12 +11,26 @@ const MenuProfile: FC = () => {
   const userStore: any = useSelector(({ user }: any) => user?.data, shallowEqual)
   const [user, setUser] = useState<any>({})
   const email: any = user?.mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')?.user_eml
+
   useEffect(() => {
     setUser(userStore)
   }, [userStore])
 
+  useEffect(() => {
+    const elements = document.getElementsByClassName('menu-link')
+    if (elements) {
+      Array.from(elements).forEach((element) => {
+        element.addEventListener('click', () => {
+          const profileCard = document.getElementById('profile_card')
+          profileCard?.classList?.remove('show')
+        })
+      })
+    }
+  }, [])
+
   return (
     <div
+      id='profile_card'
       className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-dark menu-state-bg menu-state-primary fw-400 py-4 fs-6 w-275px'
       data-kt-menu='true'>
       <div className='menu-item px-3'>
@@ -34,7 +48,7 @@ const MenuProfile: FC = () => {
       <div className='separator my-2'></div>
 
       <div className='menu-item-custom px-5'>
-        <Link href='/profile' className='menu-link px-5'>
+        <Link href='/profile' scroll={false} className='menu-link px-5'>
           나의 페이지
         </Link>
         {/* <Link href={`/history/login`} className='menu-link px-5'>

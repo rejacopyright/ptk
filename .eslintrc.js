@@ -35,6 +35,7 @@ module.exports = {
     'array-callback-return': 'warn',
     'no-unused-vars': 'off',
     'no-empty-function': 'error',
+    'no-unsafe-optional-chaining': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
