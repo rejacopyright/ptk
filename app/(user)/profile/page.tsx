@@ -153,7 +153,9 @@ const Index: FC<any> = () => {
                     비밀번호 변경
                   </div>
                   <div
-                    // onClick={() => setShowModalChangeDefault(true)}
+                    onClick={() =>
+                      navigate.replace('/profile/change-default-email', { scroll: false })
+                    }
                     className='btn btn-flex btn-white border border-gray-300 text-dark fw-bolder flex-center px-12px text-nowrap'
                     style={{ height: '36px' }}>
                     대표 이메일 변경
@@ -209,25 +211,7 @@ const Index: FC<any> = () => {
           </div>
         </>
       )}
-      {/* <ModalDeleteEmail
-        detail={tmpEmailDetail}
-        show={showModalDeleteSecondaryEmail}
-        setShow={(e: any) => {
-          setShowModalDeleteSecondaryEmail(e)
-        }}
-        onSubmit={() => {
-          const filteredEmails: any = user?.mails?.filter(
-            ({ user_eml }: any) => user_eml !== tmpEmailDetail?.user_eml
-          )
-          setUser({ mails: filteredEmails })
-        }}
-      />
-      <ModalChangeDefaultEmail
-        user={user}
-        show={showModalChangeDefault}
-        setShow={setShowModalChangeDefault}
-        onSubmit={() => showModalChangeDefault(false)}
-      />
+      {/* 
       <ModalEditProfile
         user={user}
         isModalShow={showModalProfile}

@@ -1,8 +1,11 @@
+'use client'
+
 import { me, setDefaultEmail } from '@api/profile'
 import { ToastMessage, ToastWhite } from '@components/toast'
 import { KTSVG } from '@helpers'
 import { setUser } from '@redux'
 import clsx from 'clsx'
+import { usePathname, useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { shallowEqual, useSelector } from 'react-redux'
@@ -33,18 +36,19 @@ const OptionComponent: FC<any> = ({
   )
 }
 
-const Index: FC<{
-  show: boolean
-  setShow: (e: boolean) => void
-  user: any
-  onSubmit?: (e: any) => void
-}> = ({ show, setShow, user }) => {
-  const mails: any = useSelector(({ user: { data } }: any) => data?.mails || [], shallowEqual)
-  const primaryMails = mails?.filter(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')
+const Index: FC = () => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
+  const { mails = [] } = user || {}
+
+  const primaryMails = mails?.find(({ user_eml_rprs }: any) => user_eml_rprs === 'Y')
   const secondaryMails = mails?.filter(({ user_eml_rprs }: any) => user_eml_rprs === 'N')
 
   const [selectedItem, setSelectedItem] = useState<any>()
   const [loading, setLoading] = useState<boolean>(false)
+
+  const closeModal: any = () => router.replace('/profile', { scroll: false })
 
   const handleOnSubmit = () => {
     if (selectedItem && user?.user_id) {
@@ -58,7 +62,7 @@ const Index: FC<{
             mails: user_info?.user_mail_infos || {},
           }
           setUser(combinedUser)
-          setShow(false)
+          closeModal()
           // onSubmit(selectedItem)
 
           ToastWhite(
@@ -83,19 +87,24 @@ const Index: FC<{
     }
   }
   return (
-    <Modal scrollable centered dialogClassName='modal-md' show={show} onHide={() => setShow(false)}>
+    <Modal
+      scrollable
+      centered
+      dialogClassName='modal-md'
+      show={pathname?.endsWith('change-default-email')}
+      onHide={closeModal}>
       <Modal.Body className='p-24px'>
         <div className='text-center fw-bolder fs-20px mb-24px'>대표 이메일 변경하기</div>
         <div className='position-absolute top-0 end-0'>
           <div
-            onClick={() => setShow(false)}
+            onClick={closeModal}
             className='btn p-0 mt-24px me-24px'
             style={{ width: '24px', height: '24px' }}>
             <i className='las la-times p-0 text-gray-800 fs-18px' />
           </div>
         </div>
         <div className='d-flex align-items-center justify-content-between fw-bold fs-16px text-dark bg-gray-100 px-16px radius-5 border-0 h-40px'>
-          <div className=''>{primaryMails?.[0]?.user_eml}</div>
+          <div className=''>{primaryMails?.user_eml}</div>
           <div className='text-primary fs-13px'>현재 대표 이메일</div>
         </div>
         <div className='fw-bold fs-16px my-24px text-center text-gray-500'>
@@ -117,7 +126,7 @@ const Index: FC<{
           <div className='col'>
             <div
               className='btn btn-flex w-100 btn-white border border-gray-300 text-dark fw-bolder flex-center px-12px'
-              onClick={() => setShow(false)}>
+              onClick={closeModal}>
               닫기
             </div>
           </div>
