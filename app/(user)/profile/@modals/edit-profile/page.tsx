@@ -1,3 +1,5 @@
+'use client'
+
 import axios from '@api/axios'
 import { InputDate } from '@components/form'
 import { ToastMessage } from '@components/toast'

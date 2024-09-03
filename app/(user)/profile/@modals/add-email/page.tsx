@@ -19,7 +19,7 @@ const validationSchema: any = Yup.object().shape({
   authentication_code: Yup.string().required('인증코드가 필요합니다'),
 })
 
-const Index: FC<{ show: boolean; setShow: (e: boolean) => void }> = () => {
+const Index: FC = () => {
   const router = useRouter()
   const pathname = usePathname()
   const counter: number = 180
