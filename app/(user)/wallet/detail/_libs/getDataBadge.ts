@@ -3,8 +3,8 @@ import { getBufferIMG, getPublicBadgeDetail } from '@api/public'
 import { bufferUrlToBase64 } from '@helpers'
 import { cache } from 'react'
 
-export const preload = (params: any, id: any) => {
-  void getDataBadgeQuery(params, id)
+export const preload = () => {
+  void getDataBadgeQuery(undefined, undefined)
 }
 
 export const getDataBadgeQuery: any = cache(async (params: any, id?: any) => {

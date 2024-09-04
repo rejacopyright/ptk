@@ -1,6 +1,6 @@
 import { Sticky } from '@components/cards/Sticky'
 import { APP_HOME_PATH, KTSVG } from '@helpers'
-import { CustomLogo } from '@metronic/layout/core'
+import { CustomLogo, PageTitle } from '@metronic/layout/core'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -8,10 +8,19 @@ import { getDataBadgeQuery, preload } from '../_libs/getDataBadge'
 import ExtraCards from '../_section/ExtraCards'
 import InfoCard from '../_section/InfoCard'
 
+export async function generateMetadata({ params, searchParams }) {
+  const getData: any = await getDataBadgeQuery(params, searchParams?.id)
+  const { achievement }: any = getData || {}
+  return {
+    title: achievement?.name,
+    description: achievement?.description,
+  }
+}
+
 const Index: FC<any> = async ({ params, searchParams }) => {
   const { id } = searchParams || {}
 
-  preload(params, id)
+  preload()
 
   const getData = await getDataBadgeQuery(params, id)
   const { USER_ID, isPublic, badgePublicImage, detail } = getData || {}
@@ -43,6 +52,7 @@ const Index: FC<any> = async ({ params, searchParams }) => {
     <>
       {!isPublic && (
         <>
+          <PageTitle>{getData?.achievement?.name}</PageTitle>
           <CustomLogo>
             <Link href={APP_HOME_PATH} className='d-flex align-items-center gap-8px text-dark'>
               <div

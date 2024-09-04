@@ -3,7 +3,7 @@ import { badgeImage, getBadges } from '@api/badge'
 import { Sticky } from '@components/cards/Sticky'
 import { FilterDate } from '@components/filter/Calendar'
 import { FilterCategory, valueKey } from '@components/filter/Category'
-import { ProductLoader } from '@components/loader'
+import { DotFlash, ProductLoader } from '@components/loader'
 import { ToastMessage } from '@components/toast'
 import Tooltip from '@components/tooltip'
 import { blobToBase64, configClass, detectMobileScreen, getJWTPayload, KTSVG } from '@helpers'
@@ -12,6 +12,7 @@ import { CustomLogo, PageTitle } from '@metronic/layout/core'
 import { setWalletDetail } from '@redux'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import moment from 'moment'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
@@ -40,6 +41,8 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
       }
     },
   })
+
+  const imageIsLoading: boolean = !badgeImageQuery?.isFetched
 
   // const badgeImageData: any = '/media/placeholder/badge.png'
   const badgeImageData: any = badgeImageQuery?.data?.base64 || '/media/placeholder/badge.png'
@@ -71,10 +74,16 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
       <div
         className='radius-10 d-flex mx-auto my-20px position-relative'
         style={{
-          background: `url(${badgeImageData}) center / contain no-repeat`,
+          background: imageIsLoading ? '#fff' : `url(${badgeImageData}) center / contain no-repeat`,
           height: `${isMobile ? '100px' : '150px'}`,
           width: `${isMobile ? '100px' : '150px'}`,
         }}>
+        {imageIsLoading && (
+          <div className='d-flex flex-center w-100' style={{ opacity: '0.75' }}>
+            <Image src='/logo/potentok.png' alt='Open Badge' width={75} height={15} priority />
+            <DotFlash animation='falling' style={{ transform: 'scale(0.5)', marginTop: '5px' }} />
+          </div>
+        )}
         {detail?.TXID === '0x3c96f038be04e06e69067dd8311c9737ff95983f642a995a8eb4740aec2d211c' && (
           <div className='position-absolute' style={{ bottom: '10px', right: '10px' }}>
             <Tooltip

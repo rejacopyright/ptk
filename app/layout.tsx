@@ -6,6 +6,7 @@ import '@styles/potentok.scss'
 import '@styles/splash-screen.css'
 
 import axios from '@api/axios'
+import { DotFlash } from '@components/loader/dots'
 import ToastProvider from '@components/toast/ToastProvider'
 import { LayoutProvider } from '@metronic/layout/core'
 import { ReduxProvider } from '@redux/utils/Provider'
@@ -62,8 +63,26 @@ export default async function RootLayout({ children }) {
             </LayoutProvider>
           </ReduxProvider>
         </ReactQueryProvider>
-        <div id='splash-screen' className='splash-screen'>
-          <Image src='/logo/potentok.png' alt='Open Badge' width={125} height={25} priority />
+        <div
+          id='splash-screen'
+          className='splash-screen'
+          style={{
+            flexDirection: 'initial',
+            msFlexDirection: 'initial',
+            WebkitFlexDirection: 'initial',
+            gap: '10px',
+          }}>
+          <Image
+            src='/logo/potentok.png'
+            alt='Open Badge'
+            width={125}
+            height={25}
+            priority
+            style={{ marginBottom: '10px' }}
+          />
+          <div className=''>
+            <DotFlash animation='falling' style={{ transform: 'scale(0.65)' }} />
+          </div>
         </div>
         <div id='root-modals'></div>
       </body>

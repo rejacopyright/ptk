@@ -20,6 +20,10 @@ const rewrites = [
     source: '/register',
     destination: '/auth/register',
   },
+  {
+    source: '/public/user/badge/:pathname',
+    destination: '/public/badge/:pathname',
+  },
   // {
   //   source: '/public/user/badge/:pathname*',
   //   destination: '/wallet/detail/:pathname*',
