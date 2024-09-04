@@ -2,7 +2,7 @@ import ax from 'axios'
 import Cookies from 'js-cookie'
 import qs from 'qs'
 
-export const API_SERVER: string = 'https://dev-user-api.potentok.com'
+export const API_SERVER: string = 'https://user-api.potentok.com'
 
 const axios = ax.create({
   baseURL: `${process.env.REACT_APP_SERVER || API_SERVER + '/api/v1'}/`,

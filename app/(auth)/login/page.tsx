@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { FC, useState } from 'react'
 import * as Yup from 'yup'
 
@@ -30,17 +30,14 @@ const loginSchema: any = Yup.object().shape({
 })
 
 const Login: FC = () => {
+  const router = useRouter()
   const params: any = useSearchParams()
 
   let nextRequest: any = params.get('request')
 
-  const [_statusCode, setStatusCode] = useState<any>(undefined)
   const [status, setStatus] = useState<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [passwordShown, setPasswordShown] = useState<boolean>(false)
-
-  // MODAL
-  const [_showModalNoAccount, setShowModalNoAccount] = useState<boolean>(false)
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown)
@@ -83,10 +80,12 @@ const Login: FC = () => {
       })
       .catch((err: any) => {
         const message: any = err?.response?.data?.message?.reason || err?.message || ''
-        setStatusCode(err?.response?.data?.code)
-
+        const statusCode: any = err?.response?.data?.code
         setStatus(message)
-        setShowModalNoAccount(true)
+        router.push(
+          `/login/error?email=${values?.email}&statusCode=${statusCode}&message=${message}`,
+          { scroll: false }
+        )
       })
       .finally(() => {
         setLoading(false)

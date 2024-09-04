@@ -18,7 +18,7 @@ const rewrites = [
   },
   {
     source: '/register',
-    destination: '/auth/register',
+    destination: '/register/email',
   },
   {
     source: '/public/user/badge/:pathname',

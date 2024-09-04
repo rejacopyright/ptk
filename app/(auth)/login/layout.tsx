@@ -17,6 +17,11 @@ export async function generateMetadata({ params: _params }, parent) {
   }
 }
 
-export default function Index({ children }) {
-  return children
+export default function Index({ children, modals }) {
+  return (
+    <>
+      {children}
+      {modals}
+    </>
+  )
 }

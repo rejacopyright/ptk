@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Index: FC<Props> = ({
-  defaultValue,
+  defaultValue = '',
   nullable = false,
   min = 0,
   max = undefined,
