@@ -28,6 +28,14 @@ const rewrites = [
   //   source: '/public/user/badge/:pathname*',
   //   destination: '/wallet/detail/:pathname*',
   // },
+  {
+    source: '/policy',
+    destination: '/public/policy',
+  },
+  {
+    source: '/terms',
+    destination: '/public/terms',
+  },
 ]
 const redirects = [
   {

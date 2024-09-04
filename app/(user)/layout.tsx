@@ -44,10 +44,12 @@ const UserLayout = ({ children }) => {
 
   // location?.url
   useEffect(() => {
-    const isPublic: any = location?.pathname?.startsWith('/public')
+    const isPublicPaths: boolean = /(\/(public)\/\w+)|(\/(policy|terms)$)/g.test(
+      location?.pathname || ''
+    )
 
     setHasToken(Boolean(token))
-    if (!token && !isPublic) {
+    if (!token && !isPublicPaths) {
       redirect(`/login?request=${location?.urlBtoa}`)
     }
 

@@ -81,7 +81,7 @@ export default async function RootLayout({ children }) {
             style={{ marginBottom: '10px' }}
           />
           <div className=''>
-            <DotFlash animation='falling' style={{ transform: 'scale(0.65)' }} />
+            <DotFlash animation='flashing' style={{ transform: 'scale(0.65)' }} />
           </div>
         </div>
         <div id='root-modals'></div>
