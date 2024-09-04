@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 module.exports = `
 <!doctype html>
 <html>
