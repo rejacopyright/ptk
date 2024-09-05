@@ -58,6 +58,7 @@ $size: 36;
   border: unset;
 }
 .react-calendar__tile--active,
+.react-calendar__tile--hasActive,
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus,
 .react-calendar__tile:enabled:focus {

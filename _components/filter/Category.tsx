@@ -32,10 +32,12 @@ export const FilterCategory: FC<any> = ({ filterCategory, onFilterCategory = () 
   }, [badgesCategories?.length, checkedItem?.length])
 
   useEffect(() => {
-    if (Array.isArray(filterCategory) && filterCategory?.length === 0) {
+    if ((Array.isArray(filterCategory) && filterCategory?.length === 0) || !filterCategory) {
       setCheckedItem(badgesCategories)
     } else if (Array.isArray(filterCategory)) {
-      setCheckedItem(filterCategory)
+      setTimeout(() => {
+        setCheckedItem(filterCategory)
+      }, 150)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterCategory])
