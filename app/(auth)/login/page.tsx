@@ -10,8 +10,8 @@ import Cookies from 'js-cookie'
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { FC, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import * as Yup from 'yup'
 
 // import LoginError from './_modals/LoginError'
@@ -29,11 +29,10 @@ const loginSchema: any = Yup.object().shape({
     .required('비밀번호가 필요합니다'),
 })
 
-const Login: FC = () => {
+const Login = ({ searchParams }) => {
   const router = useRouter()
-  const params: any = useSearchParams()
-
-  let nextRequest: any = params.get('request')
+  const { email = '', request } = searchParams || {}
+  let nextRequest: any = request
 
   const [status, setStatus] = useState<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -53,10 +52,12 @@ const Login: FC = () => {
         const userId: any = payload?.sub
 
         // Redirect Conditions
-        switch (atob(nextRequest)) {
-          case '/wallet/detail':
-            nextRequest = btoa(APP_HOME_PATH)
-            break
+        if (nextRequest) {
+          switch (atob(nextRequest)) {
+            case '/wallet/detail':
+              nextRequest = btoa(APP_HOME_PATH)
+              break
+          }
         }
 
         if (reason === 'success') {
@@ -105,7 +106,7 @@ const Login: FC = () => {
     <>
       <Formik
         initialValues={{
-          email: '',
+          email,
           password: '',
         }}
         validationSchema={loginSchema}
