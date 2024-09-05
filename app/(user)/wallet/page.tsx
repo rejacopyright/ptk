@@ -47,10 +47,7 @@ const Index: FC<any> = ({ searchParams }) => {
   const [reloadDataBadges, setReloadDataBadges] = useState<boolean>(false)
 
   const isAnyParams: boolean =
-    (Array.isArray(filterAchievement) && filterAchievement?.length > 0) ||
-    startDate ||
-    endDate ||
-    sortBy
+    (Array.isArray(filterAchievement) && filterAchievement?.length > 0) || startDate || endDate
 
   const getCachedCategory: any = queryClient.getQueryData([
     'getCategories',
