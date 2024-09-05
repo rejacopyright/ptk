@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4000",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev -p 4000",
     "build": "next build",
     "start": "next start -p 5000",
     "lint": "next lint",
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@next/bundle-analyzer": "^14.2.8",
     "@types/bootstrap": "^5.2.10",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -69,6 +70,7 @@
     "@types/react-tag-autocomplete": "^6.3.3",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
@@ -82,6 +84,7 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },

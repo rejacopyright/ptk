@@ -9,8 +9,10 @@ export async function middleware(req: NextRequest) {
   //   // return NextResponse.next()
   // }
 
-  const isAuthRoutes: boolean = /(\/(login|register)\/?\w*)/g.test(req.nextUrl.pathname)
-  const isPublicPaths: boolean = /(\/(public)\/\w+)|(\/(policy|terms)$)/g.test(req.nextUrl.pathname)
+  const isAuthRoutes: boolean = /^(\/(login|register|password)\/?\w*)/g.test(req.nextUrl.pathname)
+  const isPublicPaths: boolean = /^(\/(public)\/\w+)|(\/(policy|terms)$)/g.test(
+    req.nextUrl.pathname
+  )
 
   const cookieStore = cookies()
   const hasToken = cookieStore?.has('token') && Boolean(cookieStore?.get('token')?.value)

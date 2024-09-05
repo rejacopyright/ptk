@@ -44,7 +44,7 @@ const UserLayout = ({ children }) => {
 
   // location?.url
   useEffect(() => {
-    const isPublicPaths: boolean = /(\/(public)\/\w+)|(\/(policy|terms)$)/g.test(
+    const isPublicPaths: boolean = /^(\/(public)\/\w+)|^(\/(policy|terms)$)/g.test(
       location?.pathname || ''
     )
 

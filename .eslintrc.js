@@ -30,6 +30,7 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'no-console': 'warn',
     'no-empty': 'off',
+    'no-debugger': 'warn',
     eqeqeq: 'error',
     'prettier/prettier': 'error',
     'array-callback-return': 'warn',

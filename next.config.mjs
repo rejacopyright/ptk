@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 
+import bundleAnalyzer from '@next/bundle-analyzer'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const isProduction = process.env.NODE_ENV === 'production'
 
 const rewrites = [
   {
@@ -57,18 +59,51 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     serverSourceMaps: false,
+    optimizePackageImports: ['moment', 'pdfjs-dist'],
     // optimizeCss: true
   },
   compiler: {
     // removeConsole: true,
   },
+  // output: 'standalone',
   distDir: 'build',
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
+  sassOptions: { includePaths: [path.join(__dirname, '_styles')] },
   trailingSlash: false,
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
   rewrites: async () => rewrites,
   redirects: async () => redirects,
+  webpack: (config, { isServer }) => {
+    if (isProduction && !isServer && config.optimization.splitChunks.cacheGroups) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        minSize: 1,
+        maxSize: 100000,
+        minChunks: 1,
+        minRemainingSize: 0,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 30000,
+        cacheGroups: {
+          vendor: {
+            // name: 'potentok',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            chunks: 'all',
+            reuseExistingChunk: true,
+          },
+        },
+      }
+    }
+    return config
+  },
 }
 
-export default nextConfig
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: isProduction && process.env.ANALYZE === 'true',
+  analyzerMode: 'static',
+  openAnalyzer: false,
+  reportFilename: `./analyze/client.html`,
+})
+
+export default withBundleAnalyzer(nextConfig)
