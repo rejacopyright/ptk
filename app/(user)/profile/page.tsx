@@ -26,7 +26,7 @@ const Index: FC<any> = () => {
     // initialData: {data: []},
     enabled: !!user,
     queryKey: ['badgeStatsQuery', { user_id: user?.user_id }],
-    queryFn: async () => getBadgeStats(user?.user_id),
+    queryFn: () => getBadgeStats(user?.user_id),
     select: ({ data }: any) => data?.message?.reason,
   })
 

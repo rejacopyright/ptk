@@ -16,10 +16,10 @@ export const FilterCategory: FC<any> = ({ filterCategory, onFilterCategory = () 
   const badgesCategoriesQuery: any = useQuery({
     // initialData: {data: []},
     queryKey: ['getCategories', { user_id: user?.user_id }],
-    queryFn: async () => {
-      const api: any = await getCategories({ user_id: user?.user_id })
-      const res: any = api?.data?.message?.reason || []
-      setCheckedItem(res)
+    queryFn: () => getCategories({ user_id: user?.user_id }),
+    select: ({ data }: any) => {
+      const res: any = data?.message?.reason || []
+      // setCheckedItem(res)
       return res
     },
   })
@@ -30,6 +30,13 @@ export const FilterCategory: FC<any> = ({ filterCategory, onFilterCategory = () 
   const allIsChecked: any = useMemo(() => {
     return checkedItem?.length >= badgesCategories?.length
   }, [badgesCategories?.length, checkedItem?.length])
+
+  useEffect(() => {
+    if (badgesCategoriesQuery?.isFetchedAfterMount) {
+      setCheckedItem(badgesCategories)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [badgesCategoriesQuery?.isFetchedAfterMount])
 
   useEffect(() => {
     if ((Array.isArray(filterCategory) && filterCategory?.length === 0) || !filterCategory) {

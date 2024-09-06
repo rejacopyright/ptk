@@ -21,10 +21,8 @@ const CardBadge: FC<{ detail: any; onDistributionChanged: () => void; achievemen
   const badgeImageQuery: any = useQuery({
     // initialData: {data: []},
     queryKey: ['badgeImage', imgFile],
-    queryFn: async () => {
-      const api: any = await badgeImage(imgFile)
-
-      const responseData: any = api?.data
+    queryFn: () => badgeImage(imgFile),
+    select: async ({ data: responseData }: any) => {
       const base64 = await blobToBase64(responseData)
       if (responseData) {
         return { base64, blob: responseData }

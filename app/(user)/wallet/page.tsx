@@ -68,9 +68,9 @@ const Index: FC<any> = ({ searchParams }) => {
   const dataBadgesQuery: any = useQuery({
     // initialData: {data: []},
     queryKey: ['getBadges', { ...dataBadgesQueryParams, reloadDataBadges }],
-    queryFn: async () => {
-      const api: any = await getBadges(dataBadgesQueryParams)
-      let res: any = api?.data?.message?.reason?.list || []
+    queryFn: () => getBadges(dataBadgesQueryParams),
+    select: ({ data }: any) => {
+      let res: any = data?.message?.reason?.list || []
       res = res?.map((item: any) => {
         const { USER_ID: user_id, BADGE_FILE_NAME } = item || {}
         const badge_file_name: any = BADGE_FILE_NAME?.split('.')
