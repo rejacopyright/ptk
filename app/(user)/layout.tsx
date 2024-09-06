@@ -17,12 +17,13 @@ import { logout } from '@redux'
 import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import moment from 'moment'
-import { redirect, usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { shallowEqual, useSelector } from 'react-redux'
 
 const UserLayout = ({ children }) => {
+  const router = useRouter()
   const pathname = usePathname()
   const location = useLocation()
   const user: any = useSelector(({ user }: any) => user?.data, shallowEqual)
@@ -42,16 +43,17 @@ const UserLayout = ({ children }) => {
     window.onfocus = () => !token && logout()
   }
 
-  // location?.url
   useEffect(() => {
     const isPublicPaths: boolean = /^(\/(public)\/\w+)|^(\/(policy|terms)$)/g.test(
       location?.pathname || ''
     )
-
-    setHasToken(Boolean(token))
     if (!token && !isPublicPaths) {
-      redirect(`/login?request=${location?.urlBtoa}`)
+      router.push(`/login?request=${location?.urlBtoa}`)
     }
+  }, [location?.pathname, location?.urlBtoa, router, token])
+
+  useEffect(() => {
+    setHasToken(Boolean(token))
 
     const { exp }: any = getJWTPayload(token) || {}
     const countDown = setInterval(() => {
@@ -72,7 +74,7 @@ const UserLayout = ({ children }) => {
     return () => {
       clearInterval(countDown)
     }
-  }, [location?.pathname, location?.urlBtoa, token])
+  }, [location?.pathname, token])
 
   useSize(() => {
     setIsMobile(detectMobileScreen())
