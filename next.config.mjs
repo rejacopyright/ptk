@@ -58,6 +58,7 @@ const nextConfig = {
   swcMinify: true,
   productionBrowserSourceMaps: false,
   experimental: {
+    scrollRestoration: true,
     serverSourceMaps: false,
     optimizePackageImports: ['moment', 'pdfjs-dist'],
     // optimizeCss: true

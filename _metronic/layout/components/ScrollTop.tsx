@@ -49,13 +49,14 @@ export const ScrollTop: FC<Props> = ({ isMobile }) => {
 
     updateHeaderSticky()
     setTimeout(() => {
-      scrollTop()
+      // scrollTop()
     }, 0)
   }, [pathname])
 
   return (
     <div
       id='kt_scrolltop'
+      onClick={scrollTop}
       className='scrolltop'
       data-kt-scrolltop='true'
       style={{ bottom: isMobile ? 75 : '' }}>

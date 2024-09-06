@@ -93,6 +93,7 @@ const MobileMenuDrawer: FC<any> = () => {
               </div>
               <Link
                 href='/policy'
+                scroll={false}
                 className='d-flex h-60px align-items-center gap-14px mb-40px border-bottom border-gray-300'>
                 <div className='d-flex flex-center radius-100 border border-2 border-gray-300 w-30px h-30px'>
                   <i className='fas fa-arrow-right text-gray-400 fs-14px' />
@@ -101,6 +102,7 @@ const MobileMenuDrawer: FC<any> = () => {
               </Link>
               <Link
                 href='/terms'
+                scroll={false}
                 className='d-flex h-60px align-items-center gap-14px mb-40px border-bottom border-gray-300'>
                 <div className='d-flex flex-center radius-100 border border-2 border-gray-300 w-30px h-30px'>
                   <i className='fas fa-arrow-right text-gray-400 fs-14px' />

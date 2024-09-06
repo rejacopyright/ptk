@@ -19,11 +19,11 @@ export const Footer: FC<any> = () => {
           />
         </Link>
         <div className='d-flex align-items-center justify-content-center justify-content-lg-start my-10px gap-8px text-gray-700'>
-          <Link href='/policy' className='fs-14px fw-bolder text-dark'>
+          <Link href='/policy' scroll={false} className='fs-14px fw-bolder text-dark'>
             개인정보 처리 방침
           </Link>
           <div className='fs-10px fw-bolder text-gray-400'>|</div>
-          <Link href='/terms' className='fs-14px fw-bolder text-dark'>
+          <Link href='/terms' scroll={false} className='fs-14px fw-bolder text-dark'>
             서비스 이용 약관
           </Link>
         </div>
