@@ -9,6 +9,9 @@ export async function middleware(req: NextRequest) {
   //   // return NextResponse.next()
   // }
 
+  // const PUBLIC_FILE = /\.(.*)$/
+  // console.log(req.nextUrl.pathname, ' =========> ', PUBLIC_FILE.test(req.nextUrl.pathname))
+
   const isAuthRoutes: boolean = /^(\/(login|register|password)\/?\w*)/g.test(req.nextUrl.pathname)
   const isPublicPaths: boolean = /^(\/(public)\/\w+)|(\/(policy|terms)$)/g.test(
     req.nextUrl.pathname

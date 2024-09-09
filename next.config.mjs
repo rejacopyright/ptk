@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 import bundleAnalyzer from '@next/bundle-analyzer'
+// import webpack from 'next/dist/compiled/webpack/webpack-lib.js'
+// import CopyPlugin from 'copy-webpack-plugin'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -75,6 +77,16 @@ const nextConfig = {
   rewrites: async () => rewrites,
   redirects: async () => redirects,
   webpack: (config, { isServer }) => {
+    // config.plugins.push(
+    //   new CopyPlugin({
+    //     patterns: [
+    //       {
+    //         from: 'node_modules/react-toastify/dist/react-toastify.esm.mjs.map',
+    //         to: path.join(__dirname, 'public/react-toastify.esm.mjs.map'),
+    //       },
+    //     ],
+    //   })
+    // )
     if (isProduction && !isServer && config.optimization.splitChunks.cacheGroups) {
       config.optimization.splitChunks = {
         chunks: 'all',
