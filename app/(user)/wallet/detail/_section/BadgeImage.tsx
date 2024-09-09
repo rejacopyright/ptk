@@ -22,8 +22,9 @@ const Index: FC<Props> = ({ publicImg = '/media/placeholder/badge.png', isPublic
     // initialData: {data: []},
     enabled: !isPublic,
     queryKey: ['badgeImage', imgFile],
-    queryFn: () => badgeImage(imgFile),
-    select: async ({ data: responseData }: any) => {
+    queryFn: async () => {
+      const api: any = await badgeImage(imgFile)
+      const responseData: any = api?.data
       const base64 = await blobToBase64(responseData)
       if (responseData) {
         return { base64, blob: responseData }

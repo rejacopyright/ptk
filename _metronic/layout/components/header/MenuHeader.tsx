@@ -130,7 +130,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                       scroll={false}>
                       나의 지갑
                     </Link>
-                    {/* <Link
+                    <Link
                       style={menuStyle}
                       className={clsx(menuClass, {
                         [activeClass]:
@@ -138,9 +138,10 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                           pathname?.match(/(gallery)\/[a-zA-Z0-9]/gi) ||
                           /^\/(issuer+)\/([\w.%+-]+)\/(badges*$)/i.test(pathname),
                       })}
-                      to='/gallery'>
+                      href='/gallery'
+                      scroll={false}>
                       배지 갤러리
-                    </Link> */}
+                    </Link>
                     {/* <Link
                       style={menuStyle}
                       className={clsx(menuClass, {
