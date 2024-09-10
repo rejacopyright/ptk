@@ -143,7 +143,7 @@ export const MenuHeader: FC<any> = ({ sidebar, canMobilePageGoBack }) => {
                       배지 갤러리
                     </Link>
                     <Link href='/oke' scroll={false}>
-                      test4
+                      test5
                     </Link>
                     {/* <Link
                       style={menuStyle}
