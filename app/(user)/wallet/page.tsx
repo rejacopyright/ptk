@@ -150,7 +150,7 @@ const Index: FC<any> = ({ searchParams }) => {
       ) : (
         <div className='row my-24px card-badge-row-xxx'>
           {dataBadges?.map((m: any, index: number) => {
-            const achievementDetail: any = getCachedCategory?.find(
+            const achievementDetail: any = getCachedCategory?.data?.message?.reason?.find(
               (f: any) => f?.[valueKey] === m?.ACHIEVEMENT_TYPE
             )
 

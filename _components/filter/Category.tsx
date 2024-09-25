@@ -14,7 +14,7 @@ export const FilterCategory: FC<any> = ({ filterCategory, onFilterCategory = () 
   const [checkedItem, setCheckedItem] = useState<any>([])
 
   const badgesCategoriesQuery: any = useQuery({
-    // initialData: {data: []},
+    initialData: { data: [] },
     queryKey: ['getCategories', { user_id: user?.user_id }],
     queryFn: () => getCategories({ user_id: user?.user_id }),
     select: ({ data }: any) => {
